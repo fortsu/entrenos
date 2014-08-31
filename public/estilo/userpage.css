@@ -1,0 +1,188 @@
+body {
+	margin:5px 0px; padding:0px;
+	text-align:center;
+/*
+    background-color:#262115;
+*/
+    background-color:#858585;
+
+	}
+	
+#main {
+	width:960px;
+	margin:0px auto;
+	text-align:left;
+	padding:5px;
+	border:1px dashed #333;
+    background-color:#4C565E;
+/*
+	background-color:#EEF0F7;
+    border-radius: 5px;
+*/
+    -webkit-border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+	}
+
+#corporate {
+    float:left
+}
+    
+.oculto {
+    display:none;
+    }
+
+.dropdown, .dropdown ul {
+    padding:0;
+    margin:0;
+    list-style:none
+}
+.dropdown li {
+    float:left;
+    width:10em
+}
+.dropdown li ul {
+    position:absolute;
+    width:15em;
+    left:-999em
+}
+.dropdown li:hover ul {
+    left:auto
+}
+.dropdown li:hover ul, .dropdown li.hover ul {
+    left:auto
+}
+.dropdown li ul ul {
+    margin:-2em 0 0 10em
+}
+.dropdown, .dropdown ul {
+    padding:0;
+    margin:0;
+    list-style:none;
+    line-height:1
+}
+.dropdown li:hover ul ul, .dropdown li.hover ul ul {
+    left:-999em
+}
+
+/* LINK STYLE */
+.dropdown a {
+    display:block;
+    width:10em;
+    padding:.5em 1em;
+    background:#333;
+    color:#FFF;
+    font-weight:bold;
+    text-decoration:none
+}
+.dropdown a:hover {
+    color:#333;
+    background:#AAA
+}
+
+.logo {
+    color: #F6B33D;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    float: left;
+    margin-left: 5px;
+    width: 90px
+}
+
+#blanket {
+   background-color:#111;
+   opacity: 0.65;
+   position:absolute;
+   z-index: 9001; /*ooveeerrrr nine thoussaaaannnd*/
+   top:0px;
+   left:0px;
+   width:100%;
+}
+#popUpDiv {
+	position:absolute;
+	background-color:#eeeeee;
+	width:300px;
+	height:300px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+}
+
+#uploadfile {
+	position:absolute;
+	background-color:#eeeeee;
+	width:300px;
+	height:300px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+}
+
+#newworkout {
+	position:absolute;
+	background-color:#eeeeee;
+	width:300px;
+	height:300px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+}
+
+#garminconnect {
+	position:absolute;
+	background-color:#eeeeee;
+	width:300px;
+	height:300px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+}
+
+#data_container {
+    position:relative;
+}
+
+#track_info {
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:30%;
+}
+
+#map_canvas {
+    top:10px;
+    width:65%;
+    height:65%;
+}
+
+#search_container {
+    position:relative;
+    height:100%;
+}
+
+#search_results {
+    position:absolute;
+    right:10px;
+    width:50%;
+}
+
+#search_config {
+    position:absolute;
+    left:0px;
+    width:50%;
+}
+
+/*
+calendar.php
+*/
+
+.container {
+    position:relative;
+    height:80%;
+}
+
+#calendar {
+    float:left;
+    left:1px;
+    width:65%;
+}
+
+#most_recent {
+    float: right;
+    right:1px;
+    width:35%;
+}
+
+

@@ -1,0 +1,8 @@
+{
+	"autoload": {
+		"psr-4": { "Entrenos\\": "classes/" }
+    	},
+	"require": {
+        	"apache/log4php": "2.3.0"
+    	}
+}

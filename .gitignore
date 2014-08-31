@@ -1,0 +1,33 @@
+#########
+# Files #
+#########
+*.xls
+*.htaccess
+*.htpasswd
+exclude-*
+plan*
+prog*
+poliplan*
+composer.lock
+composer.phar
+public/js/entrenos.min.js
+public/estilo/entrenos.min.css
+public/communicator-api/current
+public/communicator-api/garminFortsu.min.js
+###############
+# Directories #
+###############
+public/users/
+pChart*/
+config
+public/communicator-api/1.9/
+public/fonts/
+public/js/jquery
+public/js/jqueryui
+public/js/jqplot*
+public/osm/
+public/tmp
+vendor
+tests
+scripts/db_releases
+classes/log4php

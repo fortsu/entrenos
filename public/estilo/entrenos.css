@@ -1,0 +1,1298 @@
+/* general */
+
+html{ 
+    height: 100%; 
+}
+
+.titulo {font-size: 18pt; font-weight: normal; color:#000044; font-family: Verdana, Arial, sans-serif; background: transparent;}
+.titulo2 {font-size: 12pt; font-weight: bold; color:#000044; font-family: Verdana, Arial, sans-serif; background: transparent;}
+.subt {
+    font-size: 18px;
+    font-weight: bold;
+    color: #F6B33D;
+    font-family: Tahoma, Geneva, sans-serif;
+    background: transparent;
+}
+.normal_blanca {
+	text-indent:0.5cm;
+	font-size: 14px;
+	font-weight: normal;
+	font-family: Verdana,Arial,Lucida,sans-serif;
+	color:#ffffff;
+}
+.normal2 { text-indent:0.5cm;font-size: 10pt; font-weight: normal; font-family: Tahoma, Geneva, sans-serif; }
+.normal3 {font-size: 10pt; font-weight: normal; font-family: Tahoma, Geneva, sans-serif; }
+.novedad {
+    font-size: 12px;
+    font-weight:normal;
+    font-family: Tahoma, Geneva, sans-serif;
+    color: #b9a489;
+}
+.tiempo {
+    font-size: 14px;
+    font-weight:normal;
+    font-family: Verdana, Arial, Lucida, sans-serif;
+    color: #b9a489;
+}
+.coment {
+    font-size: 12px;
+    font-weight: normal;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+.boton {
+    height: 30px;
+    width: 40px;
+}
+
+.nota {
+    font-size: x-small;
+}
+
+table.simple {
+    border: 0px solid gray;
+    font-family: "Lucida Sans", Verdana, Arial, Helvetica, sans-serif;
+    background: transparent;
+    border-radius: 0px;
+    border-spacing: 5px;
+    opacity: 0.8;
+    text-align:center
+}
+
+table.simple td {
+    font-size: 14px;
+    padding: 2px 8px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    background: white;
+}
+
+table.simple tr {
+    border-width: 0px;
+    border-radius: 0px;
+}
+
+table.advanced {
+    font-family: "Lucida Sans", Verdana, Arial, Helvetica, sans-serif;
+    margin: 0px;
+}
+
+table.advanced th {
+    padding: 2px 6px;
+    border: 0px;
+    font-size: medium;
+    text-align: center;
+}
+
+table.advanced tbody {
+    text-align:center;
+    vertical-align:middle;
+    background: none repeat scroll 0 0 #ffffff;  
+}
+
+table.advanced td {
+    font-family: Vegur, Verdana, Arial, Helvetica, sans-serif;
+    font-size: small;
+    /* http://stackoverflow.com/questions/628301/css3s-border-radius-property-and-border-collapsecollapse-dont-mix-how-can-i-u */
+    border-width: 1px 1px 0px 0px; 
+    border-style: solid;
+    border-color: black;
+    padding: 3px;
+}
+
+table.advanced tr td:first-child { 
+    border-left-width: 1px;
+}
+
+table.advanced tr:last-child td {
+    border-bottom-width: 1px;
+}
+
+table.advanced tr:last-child td:first-child {
+    border-bottom-left-radius:5px;
+}
+
+table.advanced tr:last-child td:last-child {
+    border-bottom-right-radius:5px;
+}
+
+table.advanced tr:first-child td:first-child {
+    border-top-left-radius:5px;
+}
+
+table.advanced tr:first-child td:last-child {
+    border-top-right-radius:5px;
+}
+
+body {
+    background: rgba(230,232,255,0.4);
+    margin: 0px; 
+    padding: 0px;
+    bottom: 0px;
+	text-align:center;
+    font-family: "Lucida Sans", Verdana, Arial, Helvetica, sans-serif;
+    height:100%;
+}
+
+IMG {
+    border: 0px;
+}
+h1 {
+    font-size: 52px;
+    font-family: Verdana,Arial,sans-serif;
+    color: #F6B33D;
+    font-weight: bold;
+}
+h2 {
+    font-size: 28px;
+    font-family: Verdana,Arial,sans-serif;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+h3 {
+    font-size: 20px;
+    font-family: Verdana,Arial,sans-serif;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+a {
+    font-size:small;
+    font-family:Verdana,Arial,Lucida,sans-serif;
+}
+
+a:link {
+    color: #406873;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #406873;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #406873;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* specific divs */
+
+#header {
+    background-color: transparent;        
+	text-align: center;
+    margin-bottom: 40px;
+    border: solid;
+}
+#foot {
+	background-color: transparent;        
+	text-align:center;
+	clear: both;
+}
+#caja_izda {
+	float: left;
+    margin-left: 40px;
+    margin-top: 15px;
+    background-color: transparent;        
+	text-align: center;
+}
+
+#caja_dcha {
+	float: right;
+    margin-right: 40px;
+    margin-top: 15px;
+    background-color: transparent;        
+	text-align: center;
+}
+
+#caja_dcha2 {
+	margin-top: 15px;
+	margin-right: 15px;
+	float: right;
+    background-color: transparent;
+	margin-bottom: 40px;
+}
+
+#menu {
+    width:225px;
+    float: left;
+    background-color: transparent;
+}
+#menu a {
+    font-size: 14px;
+}
+#menu ul {
+    list-style-type: none;
+}
+#right {
+    margin-left: 225px;
+    padding: 0 20px 0 20px;
+    background-color: transparent;
+	font-size: 14px;
+	font-weight: normal;
+	font-family: Verdana,Arial,Lucida,sans-serif;
+	color:#ffffff;
+}
+#fotos {
+    background-color: transparent;        
+	text-align:center;
+	margin-bottom: 40px;
+	margin-top: 40px;
+    clear: both;
+}
+#info_error {
+    background-color: transparent;
+    text-align: center;
+	font-size: 14px;
+	font-weight: normal;
+	font-family: Verdana,Arial,Lucida,sans-serif;
+	color:#ffffff;
+}
+#texto {
+    background-color: transparent;
+    text-align: left;
+	font-size: 14px;
+	font-weight: normal;
+	font-family: Verdana,Arial,Lucida,sans-serif;
+	color:#ffffff;
+}
+#novedad_izda {
+    background-color: transparent;
+    float:left;
+}
+#novedad_dcha {
+	background-color: transparent;
+}
+#formulario {
+    font-size: 14px;
+	font-weight: normal;
+	font-family: Verdana,Arial,Lucida,sans-serif;
+	color:#ffffff;
+}
+#formulario fieldset {
+    border: none;
+}
+#formulario fieldset label {
+	font-size: 14px;
+	font-weight: normal;
+	font-family: Verdana,Arial,Lucida,sans-serif;
+	color:#ffffff;
+}
+#formulario fieldset input {
+	height:20px;
+	width:200px;
+    font-size: 12px;
+    font-family: Verdana,sans-serif;
+}
+#formulario fieldset textarea {
+	height:165px;
+	width:300px;
+    font-size: 12px;
+    font-family: Verdana,sans-serif;
+}
+#lista {
+    font-size: 14px;
+	font-weight: normal;
+	font-family: Tahoma, Arial, sans-serif;
+	color:#ffffff;
+}
+#registerForm {
+	width: 35%;
+	margin: auto;
+    text-align: left;
+    font-size: x-large;
+    padding: 20px 0px 20px 50px;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 5px;
+}
+
+#contactForm {
+	width: 35%;
+	margin: auto;
+    text-align: left;
+    font-size: large;
+    padding: 20px 0px 20px 50px;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 5px;
+    box-shadow: 0 0 3px #888;
+}
+
+.frontpage-content {
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 3px 0 3px -3px #888888, -3px 0 3px -3px #888888;
+    margin: 0 auto 51px;
+    padding: 10px;
+    display:inline-block;
+    min-height:100%;
+}
+
+.modern {
+    opacity: 0.3; 
+    font-size: x-large;
+}
+
+.modern_search { 
+    font-size: 16px;
+    min-height: 28px;
+    font-weight:400;
+    vertical-align: middle;
+    padding: 0px 2px;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+}
+
+.modern_contact { 
+    font-size: 16px;
+    min-height: 28px;
+    font-weight:400;
+    vertical-align: middle;
+    padding: 0px 2px;
+    margin: 5px 0px;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+}
+
+.modern_contact:focus, .modern_search:focus, .modern_med:focus {
+    border: 1px solid #51A7E8;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.075) inset, 0px 0px 5px rgba(81,167,232,0.5);
+}
+
+.modern_med {
+    opacity: 0.5; 
+    font-size: medium;
+    padding: 2px;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+}
+
+#register_header {
+    height: 100px;
+    text-align: right;
+    margin: 15px 30px;
+}
+
+#centerWrapper {
+	width:100%;
+	text-align:center;
+}
+#error_login {
+	margin:0px auto;
+	text-align:left;
+	padding:4px;
+	border:1px solid #FF0000;
+	background-color:rgb(243,150,150);
+    font-size: 12px;
+	font-weight: normal;
+	font-family: Tahoma, Arial, sans-serif;
+    color:#000000;
+    border-radius: 5px;
+}
+
+#error_parsing {
+	width: 65%;
+	text-align: center;
+	padding: 5px 0px;
+	margin: 10px auto 0px auto;
+	border: 1px solid #FF0000;
+	background-color: rgba(243,150,150,0.4);
+    font-size: 12px;
+	font-weight: normal;
+	font-family: Tahoma, Geneve, sans-serif;
+    color: #000000;
+    border-radius: 5px;
+}
+
+#msg_parsing {
+	width: 55%;
+	text-align: center;
+    padding: 5px 0px;
+	margin: 10px auto 0px auto;
+	border: 1px solid #00FF00;
+	background-color: rgba(150,243,150,0.4);
+    font-size: 12px;
+	font-weight: normal;
+	font-family: Tahoma, Geneve, sans-serif;
+    color: #000000;
+    border-radius: 5px;
+}
+
+#link_report {
+	text-align: left;
+    padding: 10px;
+	margin: 10px auto 0px auto;
+	border: 1px solid #000000;
+	background-color: rgba(255,255,255,0.4);
+    font-size: 12px;
+	font-weight: normal;
+	font-family: Tahoma, Geneve, sans-serif;
+    color: #000000;
+    border-radius: 3px;
+}
+
+/* Added for frontpage - 20110525 */
+#home_header {
+    height:120px;
+    position:relative;
+}
+
+#login_box {
+    position:absolute;
+    top:0;
+    right:0;
+    text-align:left;
+    margin: 5px 15px;
+}
+.home-body {
+    height: 60%; /* works only if parent container is assigned a height value */
+    /*width: 99%;*/
+    margin-left: 20%;
+    text-align: left;
+    padding: 25px 0px;
+}
+
+.home-body p {
+    text-align:center;
+    font-size:x-large;
+    margin:0px;
+    color:#3D4D4D;
+}
+
+#home_footer {
+    position: fixed; 
+    bottom: 0px; 
+    height:50px;
+    width:100%;
+}
+	
+#main {
+	width:1200px;
+	margin:0px auto;
+	text-align: left;
+	padding: 5px;
+	}
+
+#corporate {
+    position:relative;
+    top:0px;
+    height:65px;
+    width:100%;
+}
+
+#logo {
+    float:left;
+}
+
+#anuncio {
+    width: 50%;
+    margin-left:25%;
+    padding: 15px;
+    /*margin:0px auto;*/
+	text-align: center;
+	padding: 15px;
+	border:1px solid #306EFF;
+	background-color:rgba(64, 104, 115, 0.2);
+    font-size: 16px;
+	font-weight: normal;
+	font-family: Tahoma, Arial, sans-serif;
+    color:#000000;
+    border-radius: 5px;
+}
+
+#anuncio a {
+    font-size: 16px;
+}
+
+/* Navigation bar */
+#navegacion {
+    width:100%;
+}
+#nav {
+    width: 100%;
+    line-height: 100%;
+    text-align:center;
+    border: 1px solid #000000;
+    border-spacing: 0px;
+    padding: 0px;
+    text-align: center;
+    color: rgba(64,104,115,0.4);
+    background: rgba(0,0,0,0.8);
+    border-radius: 6px;
+}
+#nav a {
+    display: block;
+    margin: 0;
+    padding: 5px 0px;
+    text-decoration: none;
+    font-size: medium;
+    border-radius: 6px;
+}
+
+a.current {
+    background-color: rgba(64,104,115,0.4);
+    color: white;
+    pointer-events: none;
+    cursor: default;
+}
+    
+.oculto {
+    display:none;
+}
+
+.logo {
+    color: #F6B33D;
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 5px;
+    width: 90px
+}
+
+#blanket {
+   background-color:#111;
+   opacity: 0.75;
+   position:absolute;
+   z-index: 9001; /*ooveeerrrr nine thoussaaaannnd*/
+   top:0px;
+   left:0px;
+   width:100%;
+}
+#popUpDiv {
+	position:absolute;
+	background-color:#eeeeee;
+	width:300px;
+	height:300px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+}
+
+#uploadfile {
+	position: absolute;
+	background-color: #eeeeee;
+    font-size: 16px;
+    padding: 10px;
+	width:400px;
+	height:220px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+    border-radius: 4px;
+}
+#selected_files { /* try to get 5 item columns */
+    font-size: x-small;
+    padding: 0px 0px 10px 10px;
+}
+
+#newworkout {
+	position:absolute;
+	background-color:#eeeeee;
+    padding: 20px;
+	width:500px;
+	height:400px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+    border-radius: 4px;
+}
+
+#garminconnect {
+	position:absolute;
+	background-color:#eeeeee;
+    font-size: 16px;
+    padding: 10px;
+    width:400px;
+	height:220px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+    border-radius: 4px;
+}
+
+#feedbackForm {
+    position:absolute;
+	background-color:#eeeeee;
+    font-size: large;
+    /*padding: 10px;*/
+	width: 400px;
+	height: 370px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+    border-radius: 4px;
+}
+
+#feedback_form {
+    padding: 5px 20px;
+}
+
+#feedback_form input[type=text], textarea {
+    margin: 4px 0px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px; 
+    opacity: 0.7;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    padding: 4px 6px;
+    width: 320px;
+}
+
+#feedback_form input[type=submit] {
+    margin: 10px 0px 0px; 
+}
+
+#feedback_form input[type=text]:focus, textarea:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+
+#result {
+    position: relative;
+    background-color: white;
+    font-size: large;
+    /*vertical-align: middle;*/
+    top: 125px;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #DAE3EA;
+    border-radius: 4px;
+}
+
+#data_container {
+    position:relative;
+    padding: 10px;
+}
+
+#track_info {
+    position:absolute;
+    right:5px;
+    width:33%;
+}
+
+#map_canvas {
+    width:65%;
+    height: 400px;
+}
+
+/*
+search.php
+*/
+
+#search_container {
+    position: relative;
+    height: auto;
+    margin: 10px 0px;
+}
+
+#search_results {
+    position:absolute;
+    right:20px;
+}
+
+#search_config {
+    position:relative;
+    float:left;
+}
+
+#search_date {
+    margin:10px 15px;
+    padding-left: 5px;
+}
+
+.column_search {
+    float:left;
+    margin: 0px 10px;
+}
+
+.column_date_search {
+    float:left;
+    padding: 5px 10px;
+}
+
+.new {
+    color: #CC0000;
+    font-style: italic;
+}
+
+/*
+calendar.php
+*/
+
+.container {
+    position: relative;
+    height: 90%;
+}
+
+#calendar {
+    position:absolute;
+    left: 5px;
+    margin: 5px auto 0px 0px;
+}
+
+#calendar th {
+    width:60px;
+}
+
+.calendar {
+    height: 70px;
+    width: 60px;
+    text-align:right;
+    vertical-align:top;
+}
+
+.calendar_data {
+    text-align:center;
+    vertical-align:middle;
+    font-size: medium;
+    background: rgba(64,104,115,0.2);
+}
+
+.act_index {
+    text-align:left;
+    vertical-align:middle;
+    font-size: medium;
+    background-image: -moz-linear-gradient(left top, #C9CDD6, #FFFFFF);
+}
+
+#most_recent {
+    position:absolute;
+    right: 5px;
+    margin: -30px 0px 0px auto;
+    height: 200px;
+}
+
+#new_activity {
+    position: absolute;
+    right: 0px;
+    margin: 10px 0px;
+    padding: 0px 0px 0px 5px;
+}
+
+#new_activity a {
+    display:block;
+    padding:.5em 1em;
+    background:#333;
+    color:#FFF;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+#new_activity a:hover {
+    color:#333;
+    background:#AAA
+}
+
+#feedback{
+    float:right;
+    /*padding: 0px 0px 0px 5px;*/
+}
+
+@font-face {
+   font-family: 'Indie Flower';
+   src: url(../fonts/Indie_Flower/IndieFlower.ttf);
+}
+
+@font-face {
+   font-family: 'Rock Salt';
+   src: url(../fonts/Rock_Salt/RockSalt.ttf);
+}
+
+#feedback a {
+    font-family: 'Rock Salt';
+    font-size: small; /* RockSalt is bigger than average */
+}
+
+/* Based on http://www.wickham43.net/hoverpopups.php */
+#act_prev { 
+    position:relative; 
+}
+#act_prev a span { 
+    display:none;
+    z-index:100;
+}
+#act_prev a:hover span { 
+    position: absolute; 
+    width: 120px;
+    height: 50px; 
+    left: 70px; 
+    top: -10px;
+    padding: 5px;
+    border-radius: 4px; 
+}
+
+#div_close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-spacing: 0px;
+    border-radius: 3px;
+}
+
+#div_close:hover {
+    background-color: #eeeeee; /* link does not cover div's height ??? */
+    border: 1px solid gray;
+}
+
+#div_close a:hover {
+    background-color: #eeeeee;
+}
+
+.div_tag {
+    border: 1px solid gray;
+    border-spacing: 0px;
+    border-radius: 3px;
+    background: rgba(64,104,115,0.5);
+    color: white;
+    padding: 1px 3px;
+    display: inline-block;
+    text-align: left;
+    margin: 1px 2px;
+}
+
+a.div_tag:hover {
+    background-color: transparent;
+}
+
+a.prueba:hover {
+    text-decoration: none;
+    color: gray;
+}
+
+a.prueba:link {
+    background: transparent;
+    text-decoration: none;
+    /*color: red;*/
+}
+
+#sponsor {
+    width:100%;
+    text-align:center;
+    padding: 10px 0px;
+}
+
+#invalid {
+    border: 1px solid red;
+	background: rgba(243,150,150,0.4);
+}
+
+.plan_container {
+    position:relative;
+    margin:0px;
+    padding:0px;
+    height:90px;
+    width:120px;
+    border:1px solid;
+    border-radius:3px
+}
+
+.plan_date {
+    font-size: x-small;
+    text-align: center;
+    background-color: #406873;
+    color: #FFFFFF;
+    border-radius: 2px;
+    display: block;
+    width: 60px;
+    position:absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.plan_content {
+    text-align: center;
+    position: absolute;
+    top: 20px;
+    width: 99%;
+}
+
+.tag_style {
+    font-size: 14px;
+    margin: 5px 10px;
+}
+/* Calendar */
+.current_month {
+    opacity: 1;
+}
+.other_month {
+    opacity: 0.3;
+}
+/* Equipment */
+.adv_equip_data {
+    display: none;
+}
+/* Activity */
+.act-share {
+    margin: 5px 0px;
+    width: 200px;
+    font-size:small;
+}
+
+a.link-share:hover {
+    background-color: rgba(255,255,255,0.3);
+    opacity: 0.4;
+    text-decoration: none;
+}
+
+.activity_comments {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid gray;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 2px 5px 2px 3px;
+    height: 36px;
+    width: 75%;
+    white-space: pre-wrap;      /* CSS3 */   
+    word-wrap: break-word;      /* IE */
+    margin: 5px 5px 5px 15px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+[contenteditable]:hover {
+     outline: 1px dotted #ccc;
+}
+
+#new_equipment {
+    display:none;
+    margin: 10px 0px;
+    padding: 0px 0px 0px 5px;
+}
+
+/* Settings */
+.settings_header {
+    color: #406873;
+    margin: 20px 0px 10px 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.settings_header_sub {
+    margin: 10px 0px;
+}
+.settings_note {
+    font-size: smaller;
+}
+.settings-feedback {
+    border: 1px solid;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 3px 10px;
+    margin: 5px 0px 10px;
+}
+.settings-success {
+    border-color: green;
+    color: green;
+    background-color: rgba(0,255,0,0.1);
+}
+.settings-error {
+    border-color: red;
+    color: red;
+    background-color: rgba(255,0,0,0.1);
+}
+
+/* Shops search */
+.search-results-table {
+    background-color: rgba(255,255,255,0.7);
+    /*border-radius: 0 0 5px 5px;*/
+    border-spacing: 0px;
+    box-shadow: 0 2px 3px #888; 
+    border-bottom: 1px solid #F6F6F6;
+    padding: 0;
+    width: 70%;
+    margin-left: 15%;
+    font: 15px 'Helvetica Neue LT Std 45 Light','Lucida Sans',Helvetica,'Open Sans';
+    text-align: center;
+}
+
+.search-results-table th {
+    background: none repeat scroll 0 0 #F1F1F1;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 5px;
+}
+
+.search-results-table td {
+    height: 45px;
+}
+.search-results-table td:first-child {
+    padding: 4px 4px 4px 10px;
+}
+
+/**
+* Slider was affected by settings above, so dirty fix was needed
+* Maybe it is worth to give :not pseudoclass selector a try
+**/
+
+.layout-slider td {
+    height: auto !important;
+}
+.layout-slider td:first-child {
+    padding: 0px !important;
+}
+
+.search-results-table img {
+    width: 90px; /* you can use % */
+    height: auto;
+}
+
+.search-results-table a {
+    font-size: 14px;
+    font-family: 'Helvetica Neue LT Std 45 Light','Lucida Sans',Helvetica,'Open Sans';
+}
+.search-results-comment {
+    color: gray;
+}
+.search-results-comment a{
+    color: gray;
+    text-decoration: underline;
+}
+.search-results-comment a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.search-summary-container {
+    text-align:center;
+    background: none repeat scroll 0 0 #f1f1f1;
+}
+    
+.search-summary {
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 3px;
+    padding: 3px 6px;
+    color: #341100;
+}
+
+.search-summary-error {
+    background-color: rgba(220,76,51,0.9) !important;
+    border-radius: 3px;
+    padding: 8px 6px !important;
+    color: white !important;
+    font-size: 12px !important;
+}
+
+#price {
+    font-size: 17px;
+    font-weight: 800; /* 700 is bold */
+}
+    
+#delivery-costs, #delivery-costs a {
+    font-size: 10px;
+}
+/* Tooltip for Amazon disclaimer -> http://www.webdesignerdepot.com/2012/11/how-to-create-a-simple-css3-tooltip/ */
+.tooltip {
+    display: inline;
+    position: relative;
+}
+
+.tooltip:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(tooltip_msg);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
+
+.tooltip:hover:before{
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}
+
+/**
+* Form stuff
+**/
+#feedbackFormProduct {
+    position:absolute;
+	background-color:#eeeeee;
+    font-size: large;
+    /*padding: 10px;*/
+	width: 350px;
+	height: 300px;
+	z-index: 9002; /*ooveeerrrr nine thoussaaaannnd*/
+    border-radius: 4px;
+}
+
+.field-error {
+    border:1px solid red !important;
+    color:red !important;
+}
+
+.field-error-text {
+    display:none;
+    font-size:12px;
+    height:20px;
+    line-height:20px;
+    vertical-align:middle;
+    margin:auto;
+    margin-top:5px;
+    color:red;
+}
+
+#feedback_form_product {
+    padding: 0px 0px 0px 10px;
+}
+
+a.btn2 {
+        display:block;
+        width:150px;
+        height:49px;
+        background:url(../results/img/shops/sportsshoes_logo.gif) 0 0 no-repeat;
+        text-indent:-999em;
+        border: 1px solid rgba(87, 121, 63, 0.8);
+        border-radius: 3px 3px 3px 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.25) inset;   
+}
+        
+a.btn2:hover {
+    /*background:url(../results/img/shops/sportsshoes_logo.gif) 0 -21px no-repeat;*/
+    opacity: 0.4;
+}
+/**
+* For jQuery autocomplete
+**/
+ul.ui-autocomplete li.ui-menu-item {
+    text-align:left;
+}
+.ui-menu-item a {
+    background-image: none !important;
+    opacity: 0.4 !important;
+    color: black;
+    text-decoration: none;
+}
+.ui-menu-item a:hover {
+    background-color: rgba(205,205,205,0.3) !important;
+    opacity: 1 !important;
+}
+/**
+* Calendar datepicker
+**/
+#datepicker-calendar {
+    border: none;
+    border-color:transparent;
+    text-align:center;
+    font-size:larger;
+    font-family:'Lucida Sans',Verdana,Arial,Helvetica,sans-serif;
+    margin:5px 0px 10px;
+    background-color: transparent;
+}
+#datepicker-calendar:hover {
+    background-color: #406873;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+/**
+* Aviso legal
+* h2.legal-text matches h2 elements with the class legal-text
+* .legal-text h2 matches h2 elements that are within any element with the class legal-text
+**/
+.legal-text {
+    text-align:left;
+    color:black;
+    width:80%;
+    margin-left:20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 3px #888888;
+    font-size: large;
+    margin:0px auto 40px;
+    padding:20px 20px 20px 50px;
+    height: auto;
+}
+
+.legal-text h2,h3 {
+    color: black !important;
+}
+
+/**
+* Common shop stuff (header, footer, etc.)
+**/
+.promotion {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px auto;
+}
+.promotion a:hover {
+    background-color: rgba(255,255,255,0.3);
+    opacity: 0.4;
+    text-decoration: none;
+}
+.promotion img {
+    display: block;
+    margin: auto;
+}
+.common-header {
+    background: none repeat scroll 0 0 #F1F1F1;
+    border-bottom:1px solid #E5E5E5;
+    height:60px;
+    overflow:hidden;
+    width:100%;
+}
+.common-header-logo {
+    float:left;
+    margin:15px;
+}
+.common-header-contact {
+    float:right;
+    margin:10px;
+    display:inline-block;
+    line-height:40px;
+    height:40px;
+    vertical-align:middle;
+}
+.common-header-title-container {
+    width:60%;
+    margin:auto;
+    display:inline-block;
+    height:100%;
+    line-height:100%;
+}
+.common-header-title {
+    width:75%;
+    margin:auto;
+    height:60px;
+}
+.common-header-extra {
+    float:right;
+    margin-right:15px;
+    vertical-align: middle;
+    display:inline-block;
+    height:60px;
+    line-height:60px;
+}
+.common-header a{
+    color: gray;
+    font-size: 11px;
+    text-decoration: underline;
+}
+.common-header a:hover {
+    text-decoration: none;
+    color: white;
+}
+.product-title {
+    margin: 0px;
+    padding: 0px;
+    font-size: 30px;
+    height:60px;
+    line-height: 60px;
+    font-weight: 500;
+    color: gray;
+    font-family: 'Helvetica Neue LT Std 45 Light','Lucida Sans',Helvetica,'Open Sans';
+}
+.common-footer {
+    background: none repeat scroll 0 0 #F1F1F1;
+    border-top:1px solid #E5E5E5;
+    height:50px;
+    line-height:50px;
+    width:100%;
+    color: gray;
+    font-size: 11px;
+    margin-top:-51px;
+}
+.common-footer a{
+    color: gray;
+    font-size: 11px;
+    text-decoration: underline;
+}
+.common-footer a:hover {
+    text-decoration: none;
+    color: white;
+}
