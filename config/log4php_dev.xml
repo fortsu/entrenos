@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log4php:configuration xmlns:log4php="http://logging.apache.org/log4php/">
+    <appender name="default" class="LoggerAppenderDailyFile">
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%d{Y-m-d H:i:s.u}|%c|%-5p|%F:%L|%m%n" />
+        </layout>
+        <param name="datePattern" value="Ymd" />
+        <param name="file" value="/var/log/fortsu/dev_%s.log" />
+    </appender>
+    <root>
+        <level value="DEBUG" />                                    
+        <appender_ref ref="default" />                         
+    </root>
+</log4php:configuration>
+
