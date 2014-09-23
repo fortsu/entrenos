@@ -8,6 +8,7 @@ use Entrenos\Tag;
 session_start();
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+    $log->debug("Request: " . json_encode($_REQUEST));
     # Filling data with what it comes from the request
     $form_data = $_REQUEST; 
     // Normal redirection will go to charts.php
@@ -29,8 +30,11 @@ if (isset($_SESSION['user_id'])) {
                 $log->info("Updated athlete data for user " . $user_id . ": " . implode("|", $form_data));
                 break;
             case "goal":
-                if (!isset($form_data['report_enabled']))
+                if (!isset($form_data['report_enabled'])) {
                     $form_data['report_enabled'] = 0;
+                } else {
+                    $form_data['report_enabled'] = 1;
+                }
                 $goal = new Goal($form_data);
                 try {
                     $goal->insert($conn);
