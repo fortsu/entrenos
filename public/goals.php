@@ -112,7 +112,7 @@ require_once $base_path . '/check_access.php';
                     echo "<td>";
                         if ($num_km > 0){ 
                             $kms_goal = $goal->getKmDays($conn, $current_user->id);
-                            $log->info("kms for goal #" . $goal->id . ": " . json_encode($kms_goal));
+                            $log->debug("kms for goal #" . $goal->id . ": " . json_encode($kms_goal));
                             $size = count($kms_goal);
                             $graph_data = "";
                             for ($i = 0; $i < $size; $i++) {
