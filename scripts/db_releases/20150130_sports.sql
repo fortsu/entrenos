@@ -28,7 +28,7 @@ INSERT INTO sports select null, id, "Elíptica", "ELI", 0, 1 from users where us
 --  update records set sport_id = 4 where id = 2 and user_id = 1;
 
 
--- UPDATE sport_id * 1000 to avoid changing one id twice
+-- UPDATE sport_id * 10 to avoid changing one id twice
 ALTER TABLE records MODIFY COLUMN `sport_id` int(11);
 
 -- UPDATE "Correr" whith sport_id of the user
