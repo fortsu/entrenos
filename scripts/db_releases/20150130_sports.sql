@@ -24,8 +24,8 @@ INSERT INTO sports select null, id, "Natación", "SWI", 0, 0 from users;
 INSERT INTO sports select null, id, "Elíptica", "ELI", 0, 1 from users where username='nibble';
 
 
- update records set sport_id = 0 where id in (1, 4) and user_id = 1;
- update records set sport_id = 4 where id = 2 and user_id = 1;
+-- update records set sport_id = 0 where id in (1, 4) and user_id = 1;
+--  update records set sport_id = 4 where id = 2 and user_id = 1;
 
 
 -- UPDATE sport_id * 1000 to avoid changing one id twice
