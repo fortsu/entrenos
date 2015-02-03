@@ -1,5 +1,6 @@
 <?php
 namespace Entrenos;
+
 use \PDO;
 use \DateTime;
 use \DateTimeZone;
@@ -8,6 +9,7 @@ use Entrenos\Activity;
 use Entrenos\Goal;
 use Entrenos\Tag;
 use Entrenos\Token;
+use Entrenos\Sport;
 use Entrenos\Utils\Utils;
 
 /**
@@ -143,6 +145,19 @@ class User {
             $current_token->remote_ip = $remote_ip;
             $current_token->save($conn);
             $current_token->send_new_user($this->email);
+
+            $sport = new Sport(array('user_id'=>$this->id, 'name' => 'Correr', 'abrev' => 'RUN', 'extra_weight' => 0, 'met' => 0));
+            $sport->insert($conn);
+
+            $sport = new Sport(array('user_id'=>$this->id, 'name' => 'Ciclismo', 'abrev' => 'BIK', 'extra_weight' => 0, 'met' => 0));
+            $sport->insert($conn);
+
+            $sport = new Sport(array('user_id'=>$this->id, 'name' => 'Andar', 'abrev' => 'WLK', 'extra_weight' => 0, 'met' => 0));
+            $sport->insert($conn);
+
+            $sport = new Sport(array('user_id'=>$this->id, 'name' => 'Natación', 'abrev' => 'SWI', 'extra_weight' => 0, 'met' => 0));
+            $sport->insert($conn);
+
             $success = TRUE;
         } catch (Exception $e) {
             throw new Exception($e->getMessage() . " | " . $e->getTraceAsString());
@@ -440,7 +455,7 @@ class User {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $goal_tmp = new Goal($row);
                 $user_goals[] = $goal_tmp;
-		    }
+	    }
         } else { 
             throw new Exception("Error when retrieving goals for user " . $this->id . ". Error: " . json_encode($stmt->errorInfo()) . " | User " . $this->id);
         }
@@ -454,15 +469,16 @@ class User {
     * @returns Array of sport_id availables 
     */
     function getSports($conn) {
-        $sql_query = "SELECT DISTINCT sport_id FROM records WHERE user_id = :user_id ORDER BY sport_id ASC";
+        $sql_query = "SELECT * FROM sports WHERE user_id = :user_id ORDER BY id ASC";
         $stmt = $conn->prepare($sql_query);
         $stmt->bindParam(':user_id', $this->id);
         $result = $stmt->execute();
         $user_sports = array();
-        if ($result and ($stmt->rowCount() > 0)) {
-            while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-                $user_sports[] = $row[0];
-		    }
+        if ($result) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $sport_tmp = new Sport($row);
+                $user_sports[] = $sport_tmp;
+	    }
         } else { 
             throw new Exception("Error when retrieving sports (num: " . $stmt->rowCount() . ") for user " . $this->id . ". Error: " . json_encode($stmt->errorInfo()) . " | User " . $this->id);
         }
@@ -470,7 +486,7 @@ class User {
     }
 
     public function getDaySummary($date, $conn) {
-        $sql_query = "SELECT * FROM records WHERE user_id  = :user_id AND start_time BETWEEN :date1 and DATE_ADD(:date2, INTERVAL 1 DAY)";
+        $sql_query = "SELECT records.*, sports.abrev FROM records, sports WHERE records.sport_id = sports.id AND records.user_id  = :user_id AND start_time BETWEEN :date1 and DATE_ADD(:date2, INTERVAL 1 DAY)";
         $stmt = $conn->prepare($sql_query);
         $stmt->bindParam(':user_id', $this->id);
         $stmt->bindParam(':date1', $date);
@@ -484,6 +500,7 @@ class User {
             if (count($workouts) == 1) {
                 $summary = $workouts[0];
             } else {
+                $summary['abrev'] = $activity['abrev'];
                 $summary['distance'] = 0;
                 $summary['duration'] = 0;
                 $summary['calories'] = 0;
@@ -504,14 +521,15 @@ class User {
                 }
                 $summary['pace'] = ($summary['duration']* 50) /($summary['distance'] * 3);
             }
-
+            // Abrevation of the activity
+            $activity_abrev = $summary['abrev'];
             // Displaying pace depending on distance and speed: 
             // Default: distance in km and pace in min/km
             // Pace faster than 3'/km (or faster than 3'30"/km and more than 15 km) => seems bike (km/h)
             // Pace slower than 10'/km => seems swimming, displaying elapsed time instead of speed/pace
             $speed_display = "@ " . Utils::formatPace($summary['pace']);
             if ($summary['pace'] < 3 or ($summary['pace'] < 3.5 and ($summary['distance']/1000000) > 15)) {
-                $speed_display = "@ " . sprintf("%01.2f", $summary['speed']) . " km/h";
+                $speed_display = "@" . sprintf("%01.2f", $summary['speed']) . " km/h";
             } else if ($summary['pace'] > 10) {
                 $speed_display = "en " . Utils::formatMs($summary['duration'], true);
             }
@@ -519,7 +537,7 @@ class User {
             if ($summary['distance']/1000000 < 5) {
                 $distance_display = sprintf("%4d", $summary['distance']/1000) . " m";
             }
-            $txtSummary = $date . ": " . $distance_display . " " . $speed_display;
+            $txtSummary = $date . ": " . $activity_abrev . " " . $distance_display . " " . $speed_display;
             if ($summary['beats'] > 0) {
                 $txtSummary .= " | FCmed: " . round($summary['beats']);
             }

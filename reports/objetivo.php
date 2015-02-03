@@ -21,7 +21,7 @@ if ($script_name == "objetivo") {
         } else {
             $log->info("Creating report for goal #" . $goal->id . " | File: " . $goal->last_report . " | User: " . $goal->user_id);
             try {
-                $ttf = $base_path . "/fonts/Ubuntu/Ubuntu-R.ttf";
+                $ttf = $base_path . "/fonts/Ubuntu/UbuntuMono-R.ttf";
                 $goal->imgGoalReport($img_path, $ttf, $conn);
                 header("Content-Type: image/png");
                 readfile($img_path);

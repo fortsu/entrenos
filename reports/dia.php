@@ -26,7 +26,7 @@ if ($script_name == "dia") {
         // Creating image with last day's report
         $report_img_path = "report_" . $last_date . ".png";
         if (!file_exists($report_img_path)) {
-            $ttf = $base_path . "/fonts/Ubuntu/Ubuntu-R.ttf";
+            $ttf = $base_path . "/fonts/Ubuntu/UbuntuMono-R.ttf";
             $current_user->imgDayReport ($last_date, $report_img_path, $ttf, $conn);
             $log->info("Built report from " . $last_date . " | User: " . $current_user->id);
         } else {
