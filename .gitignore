@@ -1,3 +1,4 @@
+# Some info: https://help.github.com/articles/ignoring-files/
 #########
 # Files #
 #########
@@ -10,10 +11,12 @@ prog*
 poliplan*
 composer.lock
 composer.phar
+scripts/migration_*
 public/js/entrenos.min.js
 public/estilo/entrenos.min.css
 public/communicator-api/current
 public/communicator-api/garminFortsu.min.js
+classes/Utils/excel_reader2.php
 ###############
 # Directories #
 ###############
