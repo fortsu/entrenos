@@ -94,7 +94,7 @@ use Entrenos\Utils\Search;
     
     // Default values for distance and pace depends on sport_id -> retrieving sports available for current user
     $user_sports = $current_user->getSports($conn);
-    $log->debug($current_user->id . "|Sports available in DB: " . implode("|",$user_sports));
+    //////////$log->debug($current_user->id . "|Sports available in DB: " . implode("|",$user_sports));
 
     // If there is at least one sport available in database means that current user has records stored there
     if (!empty($user_sports)) {
@@ -105,7 +105,7 @@ use Entrenos\Utils\Search;
             $current_search->sport_id = $_REQUEST['sport_id'];
         } else {
             // Default sport is the one available from user whose id is the lowest
-            $current_search->sport_id = $user_sports[0];
+            $current_search->sport_id = $user_sports[0]->id;
         }
         
         // Distance figures:
@@ -250,12 +250,12 @@ use Entrenos\Utils\Search;
                     <span style="font-weight:bold"> Deporte: </span> 
                     <select id="sport_select" name="search_filter" onchange='window.location.href="?sport_id="+this.value'>
 <?php
-            foreach ($user_sports as $loop_sport_id){
+            foreach ($user_sports as $sport){
                 $selected_txt = "selected=\"selected\"";
-                if ($loop_sport_id != $current_search->sport_id) {
+                if ($sport->id != $current_search->sport_id) {
                     $selected_txt = "";
                 }
-                echo "<option value=\"" . $loop_sport_id . "\" " . $selected_txt . "> " . Sport::$display_es[$loop_sport_id] . " </option>";
+                echo "<option value=\"" . $sport->id . "\" " . $selected_txt . "> " . $sport->name . " </option>";
             }
 ?>
                     </select>

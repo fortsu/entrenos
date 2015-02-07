@@ -366,7 +366,7 @@ class Charts {
         //$cfg['title'] = 'Altura';
         $cfg['width'] = 800;
         $cfg['height'] = 300;
-        $cfg['average-line-visible'] = false;
+        $cfg['average-line-visible'] = true;
         $cfg['horizontal-divider-visible'] = true;
         $cfg['column-divider-visible'] = false;
         $cfg['round-value-range'] = true;
@@ -376,6 +376,55 @@ class Charts {
         //Create phpMyGraph instance
         $graph = new \phpMyGraph();
         $graph->parseVerticalPolygonGraph($graph_data, $cfg, $altitude_offset);
+        #$graph->parseVerticalLineGraph($graph_data, $cfg, $altitude_offset);
+
+    }
+
+    public static function paceChart ($user_id, $activity_id, $conn) {
+        global $base_path;
+
+        $current_act = new Activity(array('id' => $activity_id, 'user_id' => $user_id));
+        $current_act->getActivity($conn);
+        $distancia = $current_act->distance/1000;
+      
+        $pace = array();
+
+        $cumulated_pace = array();
+        foreach ($current_act->laps as $key => $value) {
+            $pace[] = round($value['pace'] * 60, 2);
+            $cumulated_pace[] = round((array_sum($pace)) / count($pace), 2);  
+        }
+
+            //Set config directives
+        //$cfg['title'] = 'Altura';
+        $cfg['width'] = 800;
+        $cfg['height'] = 300;
+        $cfg['average-line-visible'] = false;
+        $cfg['horizontal-divider-visible'] = true;
+        $cfg['column-divider-visible'] = false;
+        $cfg['round-value-range'] = true;
+        $cfg['zero-line-visible'] = false;
+        $cfg['file-name'] = $base_path . "/users/" . $user_id . "/reports/alt_profile_" . $activity_id . ".png";
+        $cfg['label'] = "Pace vs Cumulated Pace";
+
+        //Create phpMyGraph instance
+        #$graph = new \phpMyGraph();
+        #$graph->parseVerticalLineGraph($pace, $cfg);
+        #$graph->parseVerticalLineGraph($pace, $cumulated_pace, $cfg);
+
+#        $graph = new verticalLineGraph(); 
+
+        //Parse
+       $graph = \phpMyGraph::factory('verticalLineGraph', $pace, $cfg);
+       $graph->parseCompare($pace, $cumulated_pace, $cfg); 
+
+
+#    $graph = new verticalLineGraph();
+    //Parse
+#    $graph->parseCompare($data1, $data2, $cfg); 
+
+ #       $graph->parseCompare($pace, $cumulated_pace, $cfg); 
+
     }
 }
 ?>

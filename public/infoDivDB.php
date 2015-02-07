@@ -30,7 +30,9 @@ if ($has_gpx) {
     if (!file_exists($report_name)) {
         $log->info($current_act->user_id . "|Creating altitude graph: " . $report_name);
         Charts::altitudeChart ($current_act->user_id, $current_act->id, $conn);
-    }
+        #Charts::paceChart ($current_act->user_id, $current_act->id, $conn);
+    
+     }
 } else {
     $log->info($current_act->user_id . "|Activity " . $current_act->id . " has no GPX related file, skipping altitude chart");
 }
@@ -191,16 +193,19 @@ if ($current_act) {
                 // Only owner can change activity's sport
                 if ($act_user->id === $current_user->id) {
                     echo "<select id=\"sport_act_" . $current_act->id . "\" onchange=\"change_sport(this.id, " . $current_act->sport_id . ");\" title=\"Pulsa para cambiar el deporte asignado\" style=\"font-size:14px;font-family:inherit;background:transparent;padding:0px;border:0;border-radius:0;\">";
-                    foreach (Sport::$display_es as $sport_id_loop => $sport_name_loc) {
+                    $user_sports = $current_user->getSports($conn);
+                    foreach ($user_sports as $sport) { 
+                       $log->info($sport->id  . "|Goal aaaaaaaaaaaaaaa" );
                         $display_selected = "";
-                        if (intval($sport_id_loop) == intval($current_act->sport_id)) {
+                        if (intval($sport->id) == intval($current_act->sport_id)) {
                             $display_selected = " selected";
                         }
-                        echo "<option value=\"" . $sport_id_loop . "\"" . $display_selected . ">" . $sport_name_loc . "</option>";
+                        echo "<option value=\"" . $sport->id . "\"" . $display_selected . ">" . $sport->name . "</option>";
                     }
                     echo "</select>";
                 } else {
-                   echo Sport::$display_es[$current_act->sport_id];
+                   $sport = new Sport($current_act->sport_id);
+                   echo $sport->name;
                 }
                 echo "</td>";
             echo "</tr>";
@@ -431,6 +436,7 @@ if ($current_act) {
                     echo "<th>Duración</th>";
                     echo "<th>Ritmo</th>";
                     echo "<th>Pico ritmo</th>";
+                    echo "<th>Ritmo Ac</th>";
                     echo "<th>FCmin</th>";
                     echo "<th>FCmed</th>";
                     echo "<th>FCmáx</th>";
@@ -438,6 +444,8 @@ if ($current_act) {
                 echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
+            $acumulated_distance=0;
+            $acumulated_duration=0;
             for ($i=0; $i < $num_laps; $i++) {   
                 echo "<tr>";
                     $dateAndTime = Utils::getDateAndTimeFromDateTime ($current_act->laps[$i]["start_time"]);
@@ -447,10 +455,19 @@ if ($current_act) {
                     echo "<td>" . round($current_act->laps[$i]["distance"]) . "</td>";
                     echo "<td>" . Utils::formatMs($current_act->laps[$i]["duration"]) . "</td>";
                     echo "<td>" . Utils::formatPace($current_act->laps[$i]["pace"]) . "</td>";
+
                     // Lap's max_pace stored in DB in min/s format!!
                     $max_speed_kmh = $current_act->laps[$i]["max_pace"]*3.6; //now in km/h
                     $max_pace_dec = 60/$max_speed_kmh;
-                    echo "<td>" . Utils::formatPace($max_pace_dec) . "</td>";
+                    // bug: max pace lost presition 
+                    echo "<td>" . Utils::formatPace(round($max_pace_dec, 5)) . "</td>";
+ 
+                    // Acumulated Pace
+                    $lap_duration=$current_act->laps[$i]["duration"];
+                    $acumulated_duration=$acumulated_duration +$lap_duration;    
+                    $lap_distance=$current_act->laps[$i]["distance"];
+                    $acumulated_distance=$acumulated_distance + $lap_distance;
+                    echo "<td>" . Utils::formatPace(round($acumulated_duration / $acumulated_distance / 60, 5)) . "</td>";
                     echo "<td>" . $current_act->laps[$i]["min_beats"] . "</td>";
                     echo "<td>" . round($current_act->laps[$i]["beats"]) . "</td>";
                     echo "<td>" . $current_act->laps[$i]["max_beats"] . "</td>";

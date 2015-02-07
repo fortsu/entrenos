@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/global_config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/database.php';
 require_once $base_path . '/check_access.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -45,10 +46,11 @@ require_once $base_path . '/check_access.php';
 	    });
     </script>
     <script>
-            function jqplot_barchart(goal_name, kms_goal){
+            function jqplot_barchart(goal_name, sport_tittle, met_type_label, kms_goal){
               jQuery('#goal_graph').empty();
-              jQuery.jqplot('goal_graph', kms_goal, { 
-                title: 'Kms acumulados para ' + goal_name,
+              jQuery.jqplot('goal_graph', kms_goal, {
+                 
+                title: met_type_label + ' acumulados de ' + sport_tittle + ' para ' + goal_name,
                 seriesDefaults:{
                   renderer:jQuery.jqplot.BarRenderer,
                   rendererOptions:{barWidth: 10},
@@ -61,7 +63,7 @@ require_once $base_path . '/check_access.php';
                   yaxis: {
                     min: 0,
                     padMin: 0,
-                    tickOptions:{formatString:'%.1f km'}
+                    tickOptions:{formatString:'%.1f ' + met_type_label}
                   }
                 },
                 highlighter: {
@@ -80,7 +82,13 @@ require_once $base_path . '/check_access.php';
     include $base_path . '/user_header.php';
     include $base_path . '/navigation_bar.php';
 
+use Entrenos\Utils\Utils;
+use Entrenos\Sport;
+
+ 
     $user_goals = $current_user->getGoals(FALSE, $conn);
+    $user_sports = $current_user->getSports($conn);
+
     $current_date = time("now");
 
     echo "<div id=\"goals_container\" style=\"position:relative\">";
@@ -88,9 +96,13 @@ require_once $base_path . '/check_access.php';
     if (count($user_goals) > 0) {
         echo "<table class=\"simple\">";
             echo "<tbody>";
+             echo "<tr><td>X</td><td>Nombre</td><td>Fecha</td><td>T. Objetivo</td><td>Descripción</td>";
+             foreach ($user_sports as $sport) {
+                echo "<td>" . $sport->name . "</td>";
+             }
+             echo "</tr>";
+
             foreach ($user_goals as $goal) {
-                $num_km = $goal->retrieveInfo("distance", $conn);
-                $log->info("Distance for goal #" . $goal->id . ": " . $num_km . " km");
                 $goal_date = strtotime($goal->goal_date);
                 $goal_date_past = false;
                 if ($goal_date < $current_date){
@@ -109,21 +121,40 @@ require_once $base_path . '/check_access.php';
                     echo ">" . $goal->goal_date . "</td>";
                     echo "<td> " . $goal->goal_time . " </td>";
                     echo "<td> " . $goal->description . " </td>";
-                    echo "<td>";
-                        if ($num_km > 0){ 
-                            $kms_goal = $goal->getKmDays($conn, $current_user->id);
-                            $log->debug("kms for goal #" . $goal->id . ": " . json_encode($kms_goal));
-                            $size = count($kms_goal);
-                            $graph_data = "";
-                            for ($i = 0; $i < $size; $i++) {
-                                $graph_data = $graph_data . "['" . $kms_goal[$i]['date'] . "'," . $kms_goal[$i]['distance'] . "]";
-                                if($i != $size -1 ){
-                                    $graph_data = $graph_data . ",";
-                                }
-                            }
-                            echo " <a href=\"javascript:void(0)\" onclick=\"jqplot_barchart('$goal->name', [[" . $graph_data . "]]);return false;\"><img src=\"images/chart_bar_bw.png\" alt=\"Ver gráfica\" title=\"Ver gráfica\"></a> ";
-                        }               
-                    echo $num_km . " km </td>";
+                    foreach ($user_sports as $sport) {
+                      if ($sport->met == Sport::Duration) {
+                         $dato = $goal->retrieveInfo($sport->id, "duration", $conn);
+                         $dato_formateado = Utils::formatMs($dato);
+                         $num_km_duration = $dato_formateado; 
+   		      } else {
+                         $dato = $goal->retrieveInfo($sport->id, "distance", $conn) . " kms";
+                         $dato_formateado = sprintf("%01.2f", $dato/1000000);
+                         $num_km_duration = $dato_formateado;
+                      }
+                      $log->info("Distance for goal #" . $goal->id . ": " . $sport->id . ":" . $num_km_duration . " ");
+                      echo "<td>";
+                          if ($num_km_duration > 0){ 
+                              $kms_goal = $goal->getKmDurationDays($sport->id, $conn, $current_user->id);
+                              $log->debug("kms for goal #" . $goal->id . ": " . json_encode($kms_goal));
+                              $size = count($kms_goal);
+                              $graph_data = "";
+                              for ($i = 0; $i < $size; $i++) {
+                                  if ($sport->met == Sport::Duration) {
+                                     $graph_data = $graph_data . "['" . $kms_goal[$i]['date'] . "'," . $kms_goal[$i]['duration'] . "]";
+                                  } else {
+                                     $graph_data = $graph_data . "['" . $kms_goal[$i]['date'] . "'," . $kms_goal[$i]['distance'] . "]";
+ 
+                                  }    
+                              if($i != $size -1 ){
+                                      $graph_data = $graph_data . ",";
+                                  }
+                              }
+                              $met_type_label = Sport::$met_type_label[$sport->met];
+
+                              echo " <a href=\"javascript:void(0)\" onclick=\"jqplot_barchart('$goal->name','$sport->name', '$met_type_label', [[" . $graph_data . "]]);return false;\"><img src=\"images/chart_bar_bw.png\" alt=\"Ver gráfica\" title=\"Ver gráfica\"></a> ";
+                          }               
+                          echo $num_km_duration . "</td>";
+                    }
                     if ($goal->report_enabled){
                         $server_path = $_SERVER['SERVER_NAME'] . pathinfo($_SERVER['REQUEST_URI'],PATHINFO_DIRNAME);
                         $report = $base_url . "/" . $goal->report_url;
