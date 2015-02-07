@@ -1,5 +1,5 @@
 <?php
-namespace Entrenos\Utils;
+//namespace Entrenos\Utils;
 /**
  * A class for reading Microsoft Excel (97/2003) Spreadsheets.
  *
