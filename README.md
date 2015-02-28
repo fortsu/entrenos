@@ -34,6 +34,14 @@ It is a Linux Apache MySQL PHP (LAMP) web application hosted on a virtual privat
 
 Programming languages used are PHP 5.x and javascript.
 
+Additional PHP5 libraries:
+
+* php5-gd
+* php5-json
+* php5-mcrypt
+* php5-mysql
+* php5-xsl
+
 ## <a name='structure'>Structure</a>
 
 * __classes__
