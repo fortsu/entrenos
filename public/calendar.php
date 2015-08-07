@@ -17,6 +17,7 @@ require_once $base_path . "/check_access.php";
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
     <title>Calendario de actividades - FortSu</title>
 	<link rel="shortcut icon" href="images/favicon.ico">
     <meta name="description" content="Gestión de actividades deportivas online" />
@@ -53,7 +54,7 @@ require_once $base_path . "/check_access.php";
 
     <script type="text/javascript">
         //garmin connect uses prototype!! -> http://docs.jquery.com/Using_jQuery_with_Other_Libraries
-        jQuery.noConflict(); 
+        jQuery.noConflict();
         jQuery(document).ready(function() {
             // Display/hide days of the month
             // Override style (just for current page)
@@ -111,7 +112,7 @@ require_once $base_path . "/check_access.php";
 <?php
     include 'user_header.php';
     include 'navigation_bar.php';
-    if (isset($_SESSION['errors'])) { 
+    if (isset($_SESSION['errors'])) {
         $errors = $_SESSION['errors'];
         echo "<div id=\"error_parsing\" >";
         foreach ($errors as $error_txt) {
@@ -122,7 +123,7 @@ require_once $base_path . "/check_access.php";
         echo "</div>";
         unset($_SESSION['errors']);
     }
-    if (isset($_SESSION['msg'])) { 
+    if (isset($_SESSION['msg'])) {
         $msg_txt = $_SESSION['msg'];
         echo "<div id=\"msg_parsing\" >";
             echo $msg_txt;
@@ -175,8 +176,8 @@ require_once $base_path . "/check_access.php";
                 }
                 $log->info($current_user->id . "|Displaying " . $num_display . " activities out of " . $num_act);
                 $workouts_mrf_tmp = array_slice($workouts_mrf, 0, $num_display);
-                foreach ($workouts_mrf_tmp as $index => $element) {               
-                    echo "<tr>";                        
+                foreach ($workouts_mrf_tmp as $index => $element) {
+                    echo "<tr>";
                         $dateAndTime = Utils::getDateAndTimeFromDateTime ($element->start_time);
                         echo "<td>\r\n";
                         echo "<div class=\"calendar_data\">\r\n";
@@ -197,7 +198,7 @@ require_once $base_path . "/check_access.php";
 	    }
 ?>
         <div id="new_activity">
-            <a href="javascript:void(0)" onclick="displayDiv('arrow_new','new_options');return false;"><img id="arrow_new" src="images/right_arrow.png"><span style="vertical-align:top;"> Nueva actividad</span></a>            
+            <a href="javascript:void(0)" onclick="displayDiv('arrow_new','new_options');return false;"><img id="arrow_new" src="images/right_arrow.png"><span style="vertical-align:top;"> Nueva actividad</span></a>
             <div id="new_options" style="display: none;">
                 <div id="new_gc"><a href="javascript:void(0)" onclick="loadGC('<?php echo $_SERVER['SERVER_NAME']; ?>')">Garmin plugin</a></div>
                 <div id="new_upload"><a href="javascript:void(0)" onclick="popup('uploadfile')">Subir fichero</a></div>
@@ -214,7 +215,7 @@ require_once $base_path . "/check_access.php";
         <form id="upload_form" action="forms/formWorkout.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="upload">
         <br />
-            Nueva actividad en formato TCX, GPX, GPX+ o FIT: 
+            Nueva actividad en formato TCX, GPX, GPX+ o FIT:
             <br />
             <input name="userfiles[]" type="file" multiple="true" style="margin: 10px 0px;" onchange="handleFiles(this.files,'selected_files');">
             <br />

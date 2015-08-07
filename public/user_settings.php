@@ -10,6 +10,7 @@ $daily_report_url = $base_url . "/users/" . $current_user->id . "/reports/daily_
 <html lang="es">
 <head>
     <title>Configuración para <?php echo $current_user->username; ?> - FortSu</title>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
 	<link rel="shortcut icon" href="images/favicon.ico">
     <meta name="description" content="Gestión de actividades deportivas online" />
     <meta name="keywords" content="deporte,correr,ciclismo,atletismo,maratón,carrera,pulsómetro,gps,gpx,polar,garmin,suunto,zapatillas,bicicleta,ropa deportiva" />
@@ -20,7 +21,7 @@ $daily_report_url = $base_url . "/users/" . $current_user->id . "/reports/daily_
     <link rel="stylesheet" href="estilo/entrenos.min.css?<?php echo $fv ?>" type="text/css"/>
     <link rel="stylesheet" href="js/jqueryui/current/themes/base/jquery-ui.min.css" type="text/css"/>
     <script type="text/javascript" src="js/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jqueryui/current/js/jquery-ui.min.js"></script>    
+    <script type="text/javascript" src="js/jqueryui/current/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/entrenos.min.js?<?php echo $fv ?>"></script>
 </head>
 <body>
@@ -30,7 +31,7 @@ $daily_report_url = $base_url . "/users/" . $current_user->id . "/reports/daily_
         include 'user_header.php';
         include 'navigation_bar.php';
 
-        if (isset($_SESSION['errors'])) { 
+        if (isset($_SESSION['errors'])) {
             $error_txt = $_SESSION['errors'];
             echo "<div id=\"error_parsing\" >";
             echo $error_txt;
@@ -41,7 +42,7 @@ $daily_report_url = $base_url . "/users/" . $current_user->id . "/reports/daily_
     ?>
         <br />
         Página de configuración para <b><?php echo $current_user->username; ?></b> (<?php echo $current_user->email; ?>)<br />
-        <ul>        
+        <ul>
         <li>
             <div class="settings_header">Visibilidad por defecto para las actividades</div>
             <div class="settings_header_sub">La configuración de cada actividad específica prevalece sobre la general.</div>

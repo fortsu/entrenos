@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/global_config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/database.php';
 use Entrenos\Activity;
@@ -34,7 +34,7 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
     } else {
         // TODO: display error message regarding lack of privileges
         //Redirected guests to start page
-        $log->debug($_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT'] . " | Guests trying to access activity page"); 
+        $log->debug($_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT'] . " | Guests trying to access activity page");
        	header('Location: ' . $base_url);
         exit();
     }
@@ -60,6 +60,7 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow,noarchive" />
     <link rel="shortcut icon" href="<?php echo $base_url; ?>/images/favicon.ico">
     <link rel="canonical" href="<?php echo $current_url; ?>"/>
     <title><?php echo $header_title; ?> - FortSu</title>
@@ -73,13 +74,13 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
     <link rel="stylesheet" href="<?php echo $base_url; ?>/estilo/entrenos.min.css?<?php echo $fv ?>" type="text/css"/>
     <script async type="text/javascript" src="<?php echo $base_url; ?>/js/jquery/jquery.min.js"></script>
     <script async type="text/javascript" src="<?php echo $base_url; ?>/js/entrenos.min.js?<?php echo $fv ?>"></script>
-<?php 
-    if ($maps_choice === "gmaps") { 
+<?php
+    if ($maps_choice === "gmaps") {
 ?>
     <link rel="stylesheet" href="https://developers.google.com/maps/documentation/javascript/examples/standard.css" type="text/css" />
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<?php 
+<?php
     } else {
 ?>
     <link rel="stylesheet" href="<?php echo $base_url; ?>/osm/current/theme/default/style.css" type="text/css"/>
@@ -93,7 +94,7 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
           bottom: 3px;
       }
     </style>
-<?php 
+<?php
     }
 ?>
 </head>

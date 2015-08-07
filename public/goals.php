@@ -7,6 +7,7 @@ require_once $base_path . '/check_access.php';
 <html lang="es">
 <head>
     <title>Objetivos deportivos - FortSu</title>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
 	<link rel="shortcut icon" href="images/favicon.ico">
     <meta name="description" content="Gestión de actividades deportivas online" />
     <meta name="keywords" content="deporte,correr,ciclismo,atletismo,maratón,carrera,pulsómetro,gps,gpx,polar,garmin,suunto,zapatillas,bicicleta,ropa deportiva" />
@@ -18,7 +19,7 @@ require_once $base_path . '/check_access.php';
     <link rel="stylesheet" href="js/jqueryui/current/themes/base/jquery-ui.min.css" type="text/css"/>
     <script src="js/jquery/jquery.min.js"></script>
     <script src="js/jqueryui/current/js/jquery-ui.min.js"></script>
-    
+
     <script type="text/javascript" src="js/entrenos.min.js?<?php echo $fv ?>"></script>
     <script type="text/javascript" src="js/jqueryui/jquery.ui.datepicker-es.js"></script>
 
@@ -47,7 +48,7 @@ require_once $base_path . '/check_access.php';
     <script>
             function jqplot_barchart(goal_name, kms_goal){
               jQuery('#goal_graph').empty();
-              jQuery.jqplot('goal_graph', kms_goal, { 
+              jQuery.jqplot('goal_graph', kms_goal, {
                 title: 'Kms acumulados para ' + goal_name,
                 seriesDefaults:{
                   renderer:jQuery.jqplot.BarRenderer,
@@ -110,7 +111,7 @@ require_once $base_path . '/check_access.php';
                     echo "<td> " . $goal->goal_time . " </td>";
                     echo "<td> " . $goal->description . " </td>";
                     echo "<td>";
-                        if ($num_km > 0){ 
+                        if ($num_km > 0){
                             $kms_goal = $goal->getKmDays($conn, $current_user->id);
                             $log->debug("kms for goal #" . $goal->id . ": " . json_encode($kms_goal));
                             $size = count($kms_goal);
@@ -122,7 +123,7 @@ require_once $base_path . '/check_access.php';
                                 }
                             }
                             echo " <a href=\"javascript:void(0)\" onclick=\"jqplot_barchart('$goal->name', [[" . $graph_data . "]]);return false;\"><img src=\"images/chart_bar_bw.png\" alt=\"Ver gráfica\" title=\"Ver gráfica\"></a> ";
-                        }               
+                        }
                     echo $num_km . " km </td>";
                     if ($goal->report_enabled){
                         $server_path = $_SERVER['SERVER_NAME'] . pathinfo($_SERVER['REQUEST_URI'],PATHINFO_DIRNAME);
@@ -146,7 +147,7 @@ require_once $base_path . '/check_access.php';
                 <input type="hidden" name="action" value="goal">
                 <input type="hidden" name="user_id" value="<?php echo $current_user->id; ?>">
                 <input id="name" name="name" type="text" value="Nombre" onblur="if(this.value==''){this.value='Nombre';this.style.opacity='0.5';}" onfocus="if(this.value=='Nombre') this.value=''; this.style.opacity='1';" style="opacity:0.5" size="12" tabindex="1" />
-                <input id="datepicker" name="goal_date" type="text" value="Fecha" onblur="if(this.value=='' || this.value=='Fecha'){this.style.opacity='0.5';this.value='Fecha';}" onfocus="this.style.opacity='1';" style="opacity:0.5" size="10" tabindex="2" />     
+                <input id="datepicker" name="goal_date" type="text" value="Fecha" onblur="if(this.value=='' || this.value=='Fecha'){this.style.opacity='0.5';this.value='Fecha';}" onfocus="this.style.opacity='1';" style="opacity:0.5" size="10" tabindex="2" />
                 <input id="goal_time" name="goal_time" type="text" value="Tiempo objetivo" onblur="if(this.value==''){this.value='Tiempo objetivo';this.style.opacity='0.5';}" onfocus="if(this.value=='Tiempo objetivo') this.value=''; this.style.opacity='1';" style="opacity:0.5" size="10" tabindex="3" /><br />
                 <textarea id="description" name="description" rows="2" cols="40" type="text" value="Descripción" onblur="if(this.value==''){this.value='Descripción';this.style.opacity='0.5';}" onfocus="if(this.value=='Descripción') this.value=''; this.style.opacity='1';" style="opacity:0.5" tabindex="4" />Descripción</textarea><br />
                 <span style="font-size:smaller">¿Informe?</span><input id="report_enabled" name="report_enabled" value="0" type="checkbox"/></td><br />
