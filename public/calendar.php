@@ -4,9 +4,7 @@ use Entrenos\Activity;
 use Entrenos\Sport;
 use Entrenos\Utils\Utils;
 
-$base_path = $_SERVER['DOCUMENT_ROOT']; // /var/www/html/entrenos/public
-$base_url = "http://" . $_SERVER['SERVER_NAME']; // http://dev.entrenos.fortsu.com
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/global_config.php';
 require_once $base_path . "/../config/database.php";
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 

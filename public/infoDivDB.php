@@ -23,9 +23,9 @@ if (isset ($_SESSION['user_id'])) {
 }
 
 // Retrieving data from DB
-$current_act = new Activity(array('id' => $record_id)); 
+$current_act = new Activity(array('id' => $record_id));
 $current_act->getActivity($conn);
-if ($has_gpx) { 
+if ($has_gpx) {
     $report_name = $base_path . "/users/" . $current_act->user_id . "/reports/alt_profile_" . $current_act->id . ".png";
     if (!file_exists($report_name)) {
         $log->info($current_act->user_id . "|Creating altitude graph: " . $report_name);
@@ -78,14 +78,14 @@ if ($current_act) {
         echo "<br />";
         if ($has_gpx) {
             $export_filename = $dateAndTime['date'] . "_" . str_replace(":","",$dateAndTime['time']); //2011-01-20 12:51:24 -> 2011-01-20_125124
-            echo "<a href=\"" . $base_url . "/forms/formExport.php?id=" . $current_act->id . "&filename=" . $export_filename . "\" title=\"Exportar actividad\">Exportar como GPX</a> ";
+            echo "<a href=\"/forms/formExport.php?id=" . $current_act->id . "&filename=" . $export_filename . "\" title=\"Exportar actividad\">Exportar como GPX</a> ";
         }
         if ($current_act->visibility) {
-            $act_visib = "<img id='lock' src='" . $base_url . "/images/unlock_16x16.png' alt='pública' style=\"vertical-align: text-top;\">";
+            $act_visib = "<img id='lock' src='/images/unlock_16x16.png' alt='pública' style=\"vertical-align: text-top;\">";
             $visib_title = "Restringir la privacidad";
             $act_visib_txt = "Actividad pública";
         } else {
-            $act_visib = "<img id='lock' src='" . $base_url . "/images/lock_16x16.png' alt='privada' style=\"vertical-align: text-top;\">";
+            $act_visib = "<img id='lock' src='/images/lock_16x16.png' alt='privada' style=\"vertical-align: text-top;\">";
             $visib_title = "Permitir acceso público y habilitar para compartir";
             $act_visib_txt = "Actividad privada";
         }
@@ -96,7 +96,7 @@ if ($current_act) {
         // Share
         $share_msg = $current_act->stringSummary(FALSE); // summary in just one line
         // Build links
-        $current_url = "http://" . $_SERVER['HTTP_HOST'] . "/actividad/" . $current_act->id;
+        $current_url = $base_url . "/actividad/" . $current_act->id;
         $url_encoded = urlencode($current_url);
         $twitter_data = array("url" => $current_url,
                             "text" => $share_msg,
@@ -105,7 +105,7 @@ if ($current_act) {
         // FB will try to fetch content if only url parameter is passed
         $share_fb = "http://www.facebook.com/sharer.php?u=" . $url_encoded;
         $share_gplus = "https://plus.google.com/share?url=" . $url_encoded;
-        
+
         //Manage visibility
         $share_div_style = "style='opacity:0.3'";
         $onclick_link = "onclick=\"alert('Haz pública la actividad para poder compartirla');\"";
@@ -117,24 +117,24 @@ if ($current_act) {
         }
 ?>
         <div class="act-share" <?php echo $share_div_style; ?>>
-            Compartir: 
+            Compartir:
             <a class="link-share" id="link_share_fb" <?php echo $meta_link; ?>="<?php echo $share_fb; ?>" <?php echo $onclick_link; ?> target="_blank">
-                <img src="<?php echo $base_url; ?>/images/connect_favicon.png" width="14" height="14" alt="Facebook logo" title="Envía a tu muro de Facebook">
+                <img src="/images/connect_favicon.png" width="14" height="14" alt="Facebook logo" title="Envía a tu muro de Facebook">
             </a>
              |
             <a class="link-share" id="link_share_tw" <?php echo $meta_link; ?>="<?php echo $share_twitter; ?>" <?php echo $onclick_link; ?> target="_blank">
-                <img src="<?php echo $base_url; ?>/images/twitter-14x14.png" width="14" height="14" alt="Twitter logo" title="Comparte en tu perfil de Twitter">
+                <img src="/images/twitter-14x14.png" width="14" height="14" alt="Twitter logo" title="Comparte en tu perfil de Twitter">
             </a>
              |
             <a class="link-share" id="link_share_gp" <?php echo $meta_link; ?>="<?php echo $share_gplus; ?>" <?php echo $onclick_link; ?> target="_blank">
-                <img src="<?php echo $base_url; ?>/images/gplus-14x14.png" width="14" height="14" alt="Google Plus logo" title="Comparte en tu perfil de Google Plus">
+                <img src="/images/gplus-14x14.png" width="14" height="14" alt="Google Plus logo" title="Comparte en tu perfil de Google Plus">
             </a>
         </div>
 <?php
         // Previous and next activities
         echo "<div style=\"margin: 5px auto auto;width: 200px;\">";
             if ($current_act->prev_act > 0) {
-                $prev_act = new Activity(array("id"=>$current_act->prev_act, "user_id"=>$current_act->user_id));                
+                $prev_act = new Activity(array("id"=>$current_act->prev_act, "user_id"=>$current_act->user_id));
                 $prev_act->getActivity($conn);
                 $act_info = sprintf("%01.1f",round($prev_act->distance/1000)/1000) . " km @ " . Utils::formatPace($prev_act->pace);
                 if (empty($prev_act->title)) {
@@ -142,13 +142,13 @@ if ($current_act) {
                 } else {
                     $act_info = $prev_act->title . " - " . $act_info;
                 }
-                echo "<a href=\"" . $base_url . "/activity.php?activity_id=" . $current_act->prev_act . "\" title=\"" . $act_info . "\">< Anterior</a>";
+                echo "<a href=\"/activity.php?activity_id=" . $current_act->prev_act . "\" title=\"" . $act_info . "\">< Anterior</a>";
             } else {
-                echo "<a href=\"" . $base_url . "search.php\" title=\"Buscar actividades\">¿Buscas algo?</a>";
+                echo "<a href=\"/search.php\" title=\"Buscar actividades\">¿Buscas algo?</a>";
             }
             echo " | ";
             if ($current_act->next_act > 0) {
-                $next_act = new Activity(array("id"=>$current_act->next_act, "user_id"=>$current_act->user_id));                
+                $next_act = new Activity(array("id"=>$current_act->next_act, "user_id"=>$current_act->user_id));
                 $next_act->getActivity($conn);
 
                 $act_info = sprintf("%01.1f",round($next_act->distance/1000)/1000) . " km @ " . Utils::formatPace($next_act->pace);
@@ -156,12 +156,12 @@ if ($current_act) {
                     $act_info = $next_act->start_time . " - " . $act_info;
                 } else {
                     $act_info = $next_act->title . " - " . $act_info;
-                }  
-                echo "<a href=\"" . $base_url . "/activity.php?activity_id=" . $current_act->next_act . "\" title=\"" . $act_info . "\">Siguiente ></a>";
+                }
+                echo "<a href=\"/activity.php?activity_id=" . $current_act->next_act . "\" title=\"" . $act_info . "\">Siguiente ></a>";
             } else {
-                echo "<a href=\"" . $base_url . "/search.php\" title=\"Buscar actividades\">¿Buscas algo?</a>";
+                echo "<a href=\"/search.php\" title=\"Buscar actividades\">¿Buscas algo?</a>";
             }
-        echo "</div>"; 
+        echo "</div>";
     }
     echo "<div id='laps' style=\"margin-top:5px;\">";
     echo "\r\n";
@@ -278,16 +278,16 @@ if ($current_act) {
             // Activity tags
             echo "<div id=\"tag_info\" style=\"margin-top:10px;margin-left:10px;\">";
                 if ($act_user->id === $current_user->id) {
-                    echo "<select id=\"equip\" onchange=\"update_tags(this.id, " . $record_id . ");\">";                
+                    echo "<select id=\"equip\" onchange=\"update_tags(this.id, " . $record_id . ");\">";
                         echo "<option selected> Material: </option>";
                         if ($num_equip > 0) {
                             foreach ($user_equip as $key => $value) {   //$value is equipment's id
                                 $equip_tmp = new Equipment(array('id' => $value));
                                 $equip_tmp->getEquipmentData($conn);
                                 $tmp_string = "";
-                                if (in_array($record_id, $equip_tmp->used)) { 
+                                if (in_array($record_id, $equip_tmp->used)) {
                                     $tmp_string = "disabled ";
-                                }                 
+                                }
                                 echo "<option " . $tmp_string . " id='equip_" . $equip_tmp->id . "' value='equip_" . $equip_tmp->id . "'> " . $equip_tmp->name . " </option>";
                             }
                         }
@@ -298,15 +298,15 @@ if ($current_act) {
                         try {
                             if ($num_equip > 0) {
                                 $tmp_delim = "";
-                                foreach ($user_equip as $key => $equip_id) {   //$value is equipment's id                                    
+                                foreach ($user_equip as $key => $equip_id) {   //$value is equipment's id
                                     $equip_tmp = new Equipment(array('id' => $equip_id));
-                                    $equip_tmp->getEquipmentData($conn);       
+                                    $equip_tmp->getEquipmentData($conn);
                                     if (in_array($record_id, $equip_tmp->used)) {
                                         echo "<div id=\"div_equip_" . $equip_id . "\" class=\"div_tag\">";
                                         // Only activity owners are entitled to delete tags
                                         $equip_delete_link = "";
                                         if ($act_user->id === $current_user->id) {
-                                            $equip_delete_link = " <a href=\"javascript:void(0)\" onclick='removeItem(" . $equip_id . "," . $record_id . ",\"equip\");return false'><img src=\"" . $base_url . "/images/close-icon_16.png\" alt=\"Quitar\" title=\"Quitar\" align=\"absmiddle\"/></a>";
+                                            $equip_delete_link = " <a href=\"javascript:void(0)\" onclick='removeItem(" . $equip_id . "," . $record_id . ",\"equip\");return false'><img src=\"/images/close-icon_16.png\" alt=\"Quitar\" title=\"Quitar\" align=\"absmiddle\"/></a>";
                                         }
                                         echo $equip_tmp->name . $equip_delete_link;
                                         echo "</div>";
@@ -318,7 +318,7 @@ if ($current_act) {
                         }
 
                     echo "</div>";
-                    
+
                     if ($act_user->id === $current_user->id) {
                         echo "<select id=\"goals\" onchange=\"update_tags(this.id, " . $record_id . ");\">";
                         echo "<option selected> Objetivos: </option>";
@@ -354,7 +354,7 @@ if ($current_act) {
                                 $tmp_delim = "";
                                 foreach ($user_goals as $key => $goal) {
                                     // Retrieving records for goal to check if already registered
-                                    $goal->getRecords($conn);       
+                                    $goal->getRecords($conn);
                                     if (in_array($record_id, $goal->activities)) {
                                         $goal_name = $goal->name . " " . $goal->goal_date;
                                         echo "<div id=\"div_goal_".$goal->id."\" class=\"div_tag\">";
@@ -362,7 +362,7 @@ if ($current_act) {
                                         // Only activity owners are entitled to delete tags
                                         $goal_delete_link = "";
                                         if ($act_user->id === $current_user->id) {
-                                            $goal_delete_link = " <a href=\"javascript:void(0)\" onclick='removeItem(".$goal->id.",".$record_id.",\"goal\");return false'><img src=\"" . $base_url . "/images/close-icon_16.png\" alt=\"Quitar\" title=\"Quitar\" align=\"absmiddle\"/></a>";
+                                            $goal_delete_link = " <a href=\"javascript:void(0)\" onclick='removeItem(".$goal->id.",".$record_id.",\"goal\");return false'><img src=\"/images/close-icon_16.png\" alt=\"Quitar\" title=\"Quitar\" align=\"absmiddle\"/></a>";
                                         }
                                         echo $goal_name . $goal_delete_link;
                                         echo "</div>";
@@ -383,7 +383,7 @@ if ($current_act) {
                                         $tmp_string = "";
                                         // Retrieving records for tag to check if already registered
                                         $tag->getRecords($conn);
-                                        if (in_array($record_id, $tag->activities)) { 
+                                        if (in_array($record_id, $tag->activities)) {
                                             $tmp_string = "disabled ";
                                             $log->info("Activity " . $current_act->id . " found in tag " . $tag->id . " list");
                                         }
@@ -402,12 +402,12 @@ if ($current_act) {
                                 $tmp_delim = "";
                                 foreach ($user_tags as $key => $tag) {
                                     // Retrieving records for tag to check if already registered
-                                    $tag->getRecords($conn);       
+                                    $tag->getRecords($conn);
                                     if (in_array($record_id, $tag->activities)) {
                                         echo "<div id=\"div_tag_" . $tag->id . "\" class=\"div_tag\">";
                                         $tag_delete_link = "";
                                         if ($act_user->id === $current_user->id) {
-                                            $tag_delete_link = " <a href=\"javascript:void(0)\" onclick='removeItem(".$tag->id.",".$record_id.",\"tag\");return false'><img src=\"" . $base_url . "/images/close-icon_16.png\" alt=\"Quitar\" title=\"Quitar\" align=\"absmiddle\"/></a>";
+                                            $tag_delete_link = " <a href=\"javascript:void(0)\" onclick='removeItem(".$tag->id.",".$record_id.",\"tag\");return false'><img src=\"/images/close-icon_16.png\" alt=\"Quitar\" title=\"Quitar\" align=\"absmiddle\"/></a>";
                                         }
                                         echo $tag->name . $tag_delete_link;
                                         echo "</div>";
@@ -438,7 +438,7 @@ if ($current_act) {
                 echo "</tr>";
             echo "</thead>";
             echo "<tbody>";
-            for ($i=0; $i < $num_laps; $i++) {   
+            for ($i=0; $i < $num_laps; $i++) {
                 echo "<tr>";
                     $dateAndTime = Utils::getDateAndTimeFromDateTime ($current_act->laps[$i]["start_time"]);
                     $lap_number = $i+1;
@@ -462,7 +462,7 @@ if ($current_act) {
             echo "</div>";
         }
 ?>
-        <form action="<?php echo $base_url; ?>/forms/formWorkout.php" id="delete_activity" method="post" enctype="multipart/form-data">
+        <form action="/forms/formWorkout.php" id="delete_activity" method="post" enctype="multipart/form-data">
             <input type="hidden" name="action" value="delete">
             <input type="hidden" name="id" value="<?php echo $current_act->id; ?>">
             <input type="hidden" name="start_time" value="<?php echo $current_act->start_time; ?>">
@@ -489,8 +489,8 @@ if ($current_act) {
                             $sim_act->getTags($conn);
                             $log->debug($current_act->user_id . "|Tags for similar activities " . $sim_act->id . ": " . json_encode($sim_act->tags));
                         } catch (Exception $e) {
-                            $log->error($current_act->user_id . "|" . $e->getMessage());               
-                        }    
+                            $log->error($current_act->user_id . "|" . $e->getMessage());
+                        }
                         echo "<tr>";
                             $dateAndTime = Utils::getDateAndTimeFromDateTime ($sim_act->start_time);
                             echo "<td><a href=\"activity.php?activity_id=" . $sim_act->id . "\" title=\"ver detalles\">" . $dateAndTime['date'] . " " . $dateAndTime['time'] . "</a></td>";

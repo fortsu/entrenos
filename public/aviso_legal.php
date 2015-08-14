@@ -11,7 +11,7 @@
     <link rel="canonical" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/aviso_legal.php" />
     <title>Aviso legal - FortSu</title>
     <link rel="stylesheet" href="estilo/entrenos.min.css" type="text/css"/>
-</head> 
+</head>
 <body style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
 
     <!-- container to stick footer at the bottom, see http://www.mindfly.com/blog/2012/08/09/the-css-sticky-footer-fix/ -->
@@ -24,11 +24,11 @@
                 </a>
             </div>
             <div class="common-header-title-container" style="margin-right:10%;">
-                <div class="common-header-title">   
+                <div class="common-header-title">
                     <h1 class="product-title">Aviso legal</h1>
                 </div>
             </div>
-        </div> 
+        </div>
         <!-- closing global header -->
 
         <div class="legal-text">
@@ -36,9 +36,9 @@
 
     <p>FORTSU.COM es una marca registrada (expediente 2992455) de DGRANDA INICIATIVAS S.L. (CIF B33988130), sociedad inscrita en el Registro Mercantil de Asturias Tomo 3895, Folio 91, Sección 8, H A Sección 42377, I/A 1 y con domicilio social en la calle Luciano Castañón 14 de Gijón (Asturias). Queda prohibida la utilización ajena por cualquier medio de la marca de FORTSU.COM, que incluye tanto el nombre como el logotipo, salvo consentimiento expreso del propietario.</p>
 
-    <p>Cualquier solicitud de contacto se puede hacer a través del <a href="http://entrenos.fortsu.com/contacto.php" title="Ir al formulario de contacto">formulario dispuesto para tal efecto</a> o enviando un mensaje a la dirección de correo electrónico contacto@fortsu.com.</p>
+    <p>Cualquier solicitud de contacto se puede hacer a través del <a href="//entrenos.fortsu.com/contacto.php" title="Ir al formulario de contacto">formulario dispuesto para tal efecto</a> o enviando un mensaje a la dirección de correo electrónico contacto@fortsu.com.</p>
 
-    <p>El acceso a la web http://entrenos.fortsu.com (en adelante "la web") implica la aceptación de todas las condiciones generales:<p>
+    <p>El acceso a la web entrenos.fortsu.com (en adelante "la web") implica la aceptación de todas las condiciones generales:<p>
 
     <h2>1.- Uso</h2>
 
@@ -57,7 +57,7 @@
     <h3>2.2.- Cookies</h3>
 
     <p>Una cookie es una pequeña información enviada por un sitio web y almacenada en el navegador del usuario con una duración limitada en el tiempo, de manera que el sitio web puede consultar la actividad previa del usuario.</p>
-    
+
     <p>FortSu solamente las utiliza de carácter técnico en el apartado de entrenamientos para almacenar la sesión iniciada por usuarios registrados (una cookie no identifica solo a una persona, sino a una combinación de computador-navegador-usuario). El usuario ha de solicitar expresamente el servicio que se presta sin coste alguno.</p>
 
     <ul>
@@ -90,10 +90,10 @@
         </div>
     </div>
     <div class="common-footer">
-        © FortSu 2013 | 
-        <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>" title="Gestionar entrenamientos">Entrenamientos</a> | 
-        <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/contacto.php" title="Formulario de contacto">Contacto</a> | 
-        <a href="http://www.fortsu.com" title="El mejor precio para tus zapatillas">Buscador de zapatillas</a>
+        © FortSu 2013 |
+        <a href="//<?php echo $_SERVER['HTTP_HOST']; ?>" title="Gestionar entrenamientos">Entrenamientos</a> |
+        <a href="//<?php echo $_SERVER['HTTP_HOST']; ?>/contacto.php" title="Formulario de contacto">Contacto</a> |
+        <a href="http://www.fortsu.es" title="El mejor precio para tus zapatillas">Buscador de zapatillas</a>
     </div>
-</body> 
+</body>
 </html>

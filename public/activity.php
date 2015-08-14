@@ -10,13 +10,13 @@ use Entrenos\User;
 **/
 if (!isset($_REQUEST['activity_id'])) {
     $log->error("No activity provided. Redirecting to home page");
-    header('Location: ' . $base_url);
+    header("Location: " . $base_url);
     exit();
 } else {
     $current_act = new Activity(array('id' => $_REQUEST['activity_id']));
     if (!$current_act->getActivity($conn)) {
         $log->error("Activity " . $current_act->id . " does not exists in DB. Redirecting to home page");
-        header('Location: ' . $base_url . '/calendar.php');
+        header("Location: " . $base_url . "/calendar.php");
         exit();
     }
 }
@@ -35,7 +35,7 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
         // TODO: display error message regarding lack of privileges
         //Redirected guests to start page
         $log->debug($_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT'] . " | Guests trying to access activity page");
-       	header('Location: ' . $base_url);
+       	header("Location: " . $base_url);
         exit();
     }
 }
@@ -61,7 +61,7 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
 <head>
     <meta charset="utf-8">
     <meta name="robots" content="noindex,nofollow,noarchive" />
-    <link rel="shortcut icon" href="<?php echo $base_url; ?>/images/favicon.ico">
+    <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="canonical" href="<?php echo $current_url; ?>"/>
     <title><?php echo $header_title; ?> - FortSu</title>
     <meta name="description" content="Gestión de actividades deportivas online" />
@@ -70,10 +70,10 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
     <meta property="og:title" content="<?php echo $header_title; ?> - FortSu" />
     <meta property="og:description" content=" " />
     <meta property="og:url" content="<?php echo $current_url; ?>" />
-    <meta property="og:image" content="<?php echo $base_url; ?>/images/logo_146x52.png" />
-    <link rel="stylesheet" href="<?php echo $base_url; ?>/estilo/entrenos.min.css?<?php echo $fv ?>" type="text/css"/>
-    <script async type="text/javascript" src="<?php echo $base_url; ?>/js/jquery/jquery.min.js"></script>
-    <script async type="text/javascript" src="<?php echo $base_url; ?>/js/entrenos.min.js?<?php echo $fv ?>"></script>
+    <meta property="og:image" content="/images/logo_146x52.png" />
+    <link rel="stylesheet" href="/estilo/entrenos.min.css?<?php echo $fv ?>" type="text/css"/>
+    <script async type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script async type="text/javascript" src="/js/entrenos.min.js?<?php echo $fv ?>"></script>
 <?php
     if ($maps_choice === "gmaps") {
 ?>
@@ -83,9 +83,9 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
 <?php
     } else {
 ?>
-    <link rel="stylesheet" href="<?php echo $base_url; ?>/osm/current/theme/default/style.css" type="text/css"/>
-    <script type="text/javascript" src="<?php echo $base_url; ?>/osm/current/OpenLayers.js"></script>
-    <script type="text/javascript" src="<?php echo $base_url; ?>/osm/current/lib/deprecated.js"></script>
+    <link rel="stylesheet" href="/osm/current/theme/default/style.css" type="text/css"/>
+    <script type="text/javascript" src="/osm/current/OpenLayers.js"></script>
+    <script type="text/javascript" src="/osm/current/lib/deprecated.js"></script>
     <style>
         /*  Altering the location of the attribution text and scale line, see http://wiki.openstreetmap.org/wiki/OpenLayers_Simple_Example */
         div.olControlAttribution, div.olControlScaleLine {

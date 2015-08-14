@@ -34,7 +34,7 @@ require_once $base_path . '/check_access.php';
     <script>
             function jqplot_barchart(tag_name, kms_tag){
               jQuery('#tag_graph').empty();
-              jQuery.jqplot('tag_graph', kms_tag, { 
+              jQuery.jqplot('tag_graph', kms_tag, {
                 title: 'Kms acumulados para ' + tag_name,
                 seriesDefaults:{
                   renderer:jQuery.jqplot.BarRenderer,
@@ -85,7 +85,7 @@ require_once $base_path . '/check_access.php';
                     echo "</td>";
                     echo "<td>" . $tag->name . "</td>";
                     echo "<td>";
-                        if ($num_km > 0){ 
+                        if ($num_km > 0){
                             $kms_tag = $tag->getKmDays($conn, $current_user->id);
                             $log->info("kms for tag #" . $tag->id . ": " . json_encode($kms_tag));
                             $size = count($kms_tag);
@@ -97,10 +97,10 @@ require_once $base_path . '/check_access.php';
                                 }
                             }
                             echo " <a href=\"javascript:void(0)\" onclick=\"jqplot_barchart('$tag->name', [[" . $graph_data . "]]);return false;\"><img src=\"images/chart_bar_bw.png\" alt=\"Ver gráfica\" title=\"Ver gráfica\"></a> ";
-                        }               
+                        }
                     echo $num_km . " km </td>";
                     if ($tag->report_enabled){
-                        $report = "http://" . $base_url . "/" . $tag->report_url;
+                        $report = "/" . $tag->report_url;
                         echo "<td><a href=\"" . $report . "\" title=\"" . $report . "\" target=\"_blank\">Enlace al informe</a></td>";
                     }
                 echo "</tr>";

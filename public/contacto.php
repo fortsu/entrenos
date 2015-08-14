@@ -28,8 +28,8 @@
             }
         }
     </script>
-</head> 
- 
+</head>
+
 <body style="font-family:'Helvetica Neue',​Helvetica,​Arial,​sans-serif;">
     <div style="min-height:100%;">
 
@@ -41,11 +41,11 @@
                 </a>
             </div>
             <div class="common-header-title-container" style="margin-right:10%;">
-                <div class="common-header-title">   
+                <div class="common-header-title">
                     <h1 class="product-title">Formulario de contacto</h1>
                 </div>
             </div>
-        </div> 
+        </div>
         <!-- closing global header -->
         <div>
 	        <form id="contactForm" action="" onsubmit='send_form("contactForm","result","forms/sendFeedback.php");return false;' method="post" enctype="multipart/form-data" style="margin-top:75px;">
@@ -67,11 +67,11 @@
     </div>
 
     <div class="common-footer">
-        © FortSu 2013 | 
-        <a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>" title="Gestionar entrenamientos">Entrenamientos</a> | 
-        <a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>/aviso_legal.php" title="Formalidades">Aviso legal</a> | 
-        <a href="http://www.fortsu.com" title="El mejor precio para tus zapatillas">Buscador de zapatillas</a>
+        © FortSu 2013 |
+        <a href="//<?php echo $_SERVER['SERVER_NAME']; ?>" title="Gestionar entrenamientos">Entrenamientos</a> |
+        <a href="//<?php echo $_SERVER['SERVER_NAME']; ?>/aviso_legal.php" title="Formalidades">Aviso legal</a> |
+        <a href="http://www.fortsu.es" title="El mejor precio para tus zapatillas">Buscador de zapatillas</a>
     </div>
 
-</body> 
+</body>
 </html>

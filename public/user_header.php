@@ -1,7 +1,7 @@
     <div id="corporate">
         <div id="logo">
-            <a href="<?php echo $base_url; ?>" title="Ir a la página inicial" style="background-color:transparent;">
-                <img src="<?php echo $base_url; ?>/images/logo_146x52.png">
+            <a href="/" title="Ir a la página inicial" style="background-color:transparent;">
+                <img src="/images/logo_146x52.png">
             </a>
         </div>
 <?php
@@ -11,7 +11,7 @@
             <div>
                 <?php
                 // $current_user must have been checked in parent page!
-	            echo " " . $current_user->username . " (<a href=\"" . $base_url . "/logout.php\" style=\"font-family:'Lucida Sans',Verdana,Arial,Helvetica,sans-serif;\">desconectar</a>)";
+	            echo " " . $current_user->username . " (<a href=\"/logout.php\" style=\"font-family:'Lucida Sans',Verdana,Arial,Helvetica,sans-serif;\">desconectar</a>)";
                 ?>
             </div>
             <a href="javascript:void(0)" onclick="launch_feedback('feedback_form','result','feedbackForm')">¿Algo que contar?</a>
@@ -20,9 +20,10 @@
         <div id="anuncio">
 <?php
     $messages = array("Mejor gestión de deportes, próximamente en sus pantallas",
-                      "Puedes <a href=\"" . $base_url . "/user_settings.php\">mostrar tus rutas</a> en mapas de OpenStreetMaps o Google Maps",
+                      "Puedes <a href=\"/user_settings.php\">mostrar tus rutas</a> en mapas de OpenStreetMaps o Google Maps",
                       "Apunta fallos, mejoras o sugerencias en el <a href=\"https://github.com/fortsu/entrenos/issues\">sistema de seguimiento de errores</a>",
-                      "Código fuente disponible: <a href=\"https://github.com/fortsu/entrenos\">fork me on GitHub!</a>");
+                      "Código fuente disponible: <a href=\"https://github.com/fortsu/entrenos\">fork me on GitHub!</a>",
+                      "Todo el intercambio de información está <b>cifrado</b> para mejorar la privacidad");
     $minutes = intval(date('i'));
     $msg_index = $minutes % count($messages);
     echo $messages[$msg_index];
@@ -37,7 +38,7 @@
             <input type="hidden" name="request_uri" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <input type="hidden" name="user_agent" value="<?php echo $_SERVER['HTTP_USER_AGENT']; ?>">
             <input type="hidden" name="remote_ip" value="<?php echo $_SERVER['REMOTE_ADDR']; ?>">
-            <input type="hidden" name="email" value="<?php echo $current_user->email; ?>">         
+            <input type="hidden" name="email" value="<?php echo $current_user->email; ?>">
             <br />
             <input name="email_display" type="text" value="<?php echo $current_user->email; ?>" disabled="disabled"/>
             <br />
@@ -50,7 +51,7 @@
 	    </form>
         <div id="result" style="display:none;"></div>
         <div id="div_close">
-            <a href="javascript:void(0);" onclick="popup('feedbackForm');"><img src="<?php echo $base_url; ?>/images/close-icon_16.png" alt="Cerrar" title="Cerrar"/></a>
+            <a href="javascript:void(0);" onclick="popup('feedbackForm');"><img src="/images/close-icon_16.png" alt="Cerrar" title="Cerrar"/></a>
         </div>
     </div>
 <?php
@@ -58,8 +59,8 @@
 ?>
         <!-- float divs must appear before the center section -->
         <div id="anuncio">
-            Encuentra <a href="http://www.fortsu.com">el <strong>mejor precio</strong> para tus zapatillas</a> comparando tiendas online
-        </div>  
+            Encuentra <a href="http://www.fortsu.es">el <strong>mejor precio</strong> para tus zapatillas</a> comparando tiendas online
+        </div>
     </div>
 <?php
     }

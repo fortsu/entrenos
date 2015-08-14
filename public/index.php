@@ -6,24 +6,24 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/database.php';
 require_once $base_path . "/check_access.php";
 
 if ($_SESSION['user_id'] > 0) {
-    $redirect = $base_url . "/calendar.php";
+    $redirect = "/calendar.php";
     $log->debug("Redirect logged user " . $_SESSION['login'] . " (" . $_SESSION['user_id'] . ") to " . $redirect);
     header('Location: ' . $redirect);
 }
 
-?> 
+?>
 <!DOCTYPE html>
 <html lang="es">
-<head> 
+<head>
 	<link rel="shortcut icon" href="images/favicon.ico">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-    <title>Gestiona tus actividades deportivas - FortSu</title> 
-    <link rel="stylesheet" href="estilo/entrenos.min.css?<?php echo $fv ?>" type="text/css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Gestiona tus actividades deportivas - FortSu</title>
+    <link rel="stylesheet" href="/estilo/entrenos.min.css?<?php echo $fv ?>" type="text/css"/>
     <meta name="keywords" content="registro,actividades,deporte" />
     <meta name="author" content="entrenos.fortsu.com" />
-</head> 
- 
-<body> 
+</head>
+
+<body>
 <div id="home_header">
 	<div id="login_box">
 		<form id="form_login" action="forms/formUser.php" method="post" onsubmit="login.sending_submit(); return true;">
@@ -47,10 +47,10 @@ if ($_SESSION['user_id'] > 0) {
             }
         ?>
         <div style="margin:8px">
-		    <a href="register.php" title="Darse de alta">Abrir cuenta</a> | 
+		    <a href="register.php" title="Darse de alta">Abrir cuenta</a> |
             <a href="https://graph.facebook.com/oauth/authorize?client_id=115493161855991&amp;redirect_uri=<?php echo $base_url; ?>/oauth/fb_login.php&amp;scope=publish_stream,offline_access,email" style="background-color:transparent">
                 <img title="Entra con tu cuenta de Facebook" alt="Facebook login" src="images/connect_favicon.png">
-            </a> | 
+            </a> |
             <a href="password_request.php" title="Recupera acceso a tu cuenta">¿Contraseña olvidada?</a>
         </div>
     </div>
@@ -62,5 +62,5 @@ if ($_SESSION['user_id'] > 0) {
 <?php
     include_once "./home_footer.php";
 ?>
-</body> 
-</html> 
+</body>
+</html>

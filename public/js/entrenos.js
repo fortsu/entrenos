@@ -65,17 +65,17 @@ function edit_act_field(act_id, act_field, first_value, new_value) {
         }
         jQuery("#" + div_id).html(old_value);
     } else {
-        if (new_value != old_value) { 
+        if (new_value != old_value) {
             var jqXHR = jQuery.ajax({
                 type: "POST",
-                url: "http://" + window.location.hostname + "/forms/formWorkout.php",
+                url: "/forms/formWorkout.php",
                 dataType: "text",
                 data: "action=update_field&act_id=" + act_id + "&act_field=" + act_field + "&new_value=" + new_value + "&old_value=" + old_value,
                 success: function() {
                     // update shared object with latest value
                     user_activities[act_id][act_field] = new_value;
                     // preparing data to display
-                    jQuery("#" + div_id).css({ opacity: 1 });                    
+                    jQuery("#" + div_id).css({ opacity: 1 });
                     alert(ok_msg);
                     var ok_value = new_value;
                     if (ok_value == "") {
@@ -116,7 +116,7 @@ function edit_act_field(act_id, act_field, first_value, new_value) {
 /**
  * Update db values of speed and pace according to new value of field (distance || duration)
  * Refresh displayed value of the average field (initially intended for pace in activity page)
- * @param {Number} act_id 
+ * @param {Number} act_id
  * @param {Number} act_field
  * @param {Number} act_field_value
  * @return nothing
@@ -125,7 +125,7 @@ function update_avgs(act_id, act_field, act_field_value) {
     var div_id = "pace_act_" + act_id;
     var jqXHR = jQuery.ajax({
         type: "POST",
-        url: "http://" + window.location.hostname + "/forms/formWorkout.php",
+        url: "/forms/formWorkout.php",
         data: "action=update_avgs&act_id=" + act_id + "&field=" + act_field + "&value=" + act_field_value,
         success: function() {
             var responseObj = JSON.parse(jqXHR.responseText);
@@ -157,7 +157,7 @@ function formatPace(db_pace) {
 function change_sport(select_id, old_value) {
     // select id is sport_act_XYZ
     var tmp = select_id.split("_");
-    var act_field = tmp[0] + "_id"; //actually we could completely hardcode it 
+    var act_field = tmp[0] + "_id"; //actually we could completely hardcode it
     var act_id = tmp.pop();
     // Get selected value
     var sportSelect = document.getElementById(select_id);
@@ -170,11 +170,11 @@ function change_sport(select_id, old_value) {
 
     var jqXHR = jQuery.ajax({
         type: "POST",
-        url: "http://" + window.location.hostname + "/forms/formWorkout.php",
+        url: "/forms/formWorkout.php",
         dataType: "text",
         data: "action=update_field&act_id=" + act_id + "&act_field=" + act_field + "&new_value=" + new_value + "&old_value=" + old_value,
         success: function() {
-            // preparing data to display                    
+            // preparing data to display
             alert(ok_msg);
             // reload page from server (some figures change depending on sport value)
             //window.location.reload(true);
@@ -196,7 +196,7 @@ function edit_equip (equip_id, equip_field) {
     if (new_value !== old_value) {
         var jqXHR = jQuery.ajax({
             type: "POST",
-            url: "http://" + window.location.hostname + "/forms/formEquip.php",
+            url: "/forms/formEquip.php",
             dataType: "text",
             data: "action=update_equip&equip_id=" + equip_id + "&equip_field=" + equip_field + "&new_value=" + new_value,
             success: function() {
@@ -210,7 +210,7 @@ function edit_equip (equip_id, equip_field) {
                 jQuery("#" + div_id).html(old_value);
                 jQuery("#" + div_id).attr("title", old_value);
             }
-        });        
+        });
     }
 }
 
@@ -223,13 +223,13 @@ function enable_equip (equip_id) {
     if (jQuery('#' + div_id).is(':checked')) {
         old_value = 0;
         new_value = 1;
-    }    
+    }
 
     //console.log("Equip id: " + equip_id + " | field: " + equip_field + " | Old value: " + old_value + " | New value: " + new_value);
     if (new_value !== old_value) {
         var jqXHR = jQuery.ajax({
             type: "POST",
-            url: "http://" + window.location.hostname + "/forms/formEquip.php",
+            url: "/forms/formEquip.php",
             dataType: "text",
             data: "action=update_equip&equip_id=" + equip_id + "&equip_field=" + equip_field + "&new_value=" + new_value,
             success: function() {
@@ -244,7 +244,7 @@ function enable_equip (equip_id) {
                 //jQuery("#" + div_id).css('background','red');
                 jQuery("#" + div_id).prop("checked", old_value);
             }
-        });        
+        });
     }
 }
 
@@ -273,10 +273,10 @@ function loadWorkout(entry, user_id, targetDiv, has_gpx, map) {
             if (has_gpx) {
                 var embedChart = new Image();
                 // Altitude profile chart is created in infoDivDB.php
-                embedChart.src = "http://" + window.location.hostname + "/users/" +  user_id + "/reports/alt_profile_" + entry + ".png";
+                embedChart.src = "/users/" +  user_id + "/reports/alt_profile_" + entry + ".png";
                 var chartDiv = "elevation_chart";
                 var div = document.getElementById(chartDiv);
-                removeImg(chartDiv); 
+                removeImg(chartDiv);
 	            div.appendChild(embedChart);
             }
 		}
@@ -298,14 +298,14 @@ function loadWorkout(entry, user_id, targetDiv, has_gpx, map) {
 
     // Adding and loading dynamically embedded map to <head>
     if (has_gpx) {
-        var embedMapSrc = "http://" + window.location.hostname + "/" + build_map + "?file=users/" + user_id + "/data/" + entry;    
+        var embedMapSrc = "/" + build_map + "?file=users/" + user_id + "/data/" + entry;
         var embedMap = document.createElement('script')
         embedMap.setAttribute("type","text/javascript")
         embedMap.setAttribute("src", embedMapSrc)
         document.getElementsByTagName("head")[0].appendChild(embedMap)
     }
 
-    var infoUrl = "http://" + window.location.hostname + "/infoDivDB.php?id=" + entry + "&has_gpx=" + has_gpx;
+    var infoUrl = "/infoDivDB.php?id=" + entry + "&has_gpx=" + has_gpx;
 	xmlhttp.open("GET", infoUrl, true);
 	xmlhttp.send();
 }
@@ -314,7 +314,7 @@ function deleteActivity(start_time) {
     var resp = confirm("¿Desea borrar la entrada " + start_time + "?");
     if (resp == true) {
         //alert("You pressed OK!");
-        document.forms['delete_activity'].submit(); 
+        document.forms['delete_activity'].submit();
     }
     return false;
 }
@@ -343,8 +343,8 @@ function checkFormInputBlur(element) {
 **/
 function checkFormInputFocus(element) {
     jQuery(element).removeClass('field-error');
-    if (element.value == element.getAttribute('data-orig')) 
-        element.value= ''; 
+    if (element.value == element.getAttribute('data-orig'))
+        element.value= '';
     element.style.opacity='1';
 }
 /**
@@ -371,7 +371,7 @@ function checkDataChanges(myform){
 function send_form(form_id, result_id, php_script) {
     jQuery("#"+result_id).show();
     jQuery("#"+form_id).hide();
-    jQuery.post(php_script, jQuery('#'+ form_id).serialize(), 
+    jQuery.post(php_script, jQuery('#'+ form_id).serialize(),
         function(data) {
             jQuery("#"+result_id).append(data.response);
         },
@@ -385,7 +385,7 @@ function send_form(form_id, result_id, php_script) {
 function sendFormCheck(myform, result_id, php_script) {
     if (checkDataChanges(myform)) {
         if (php_script.indexOf('http://') < 0) {
-            php_script = "http://" + window.location.hostname + "/" + php_script;
+            php_script = "/" + php_script;
         }
         // getAttribute(XYZ) -> attribute of DOM element | element.id -> element property
         // http://stackoverflow.com/questions/10280250/getattribute-versus-element-object-properties
@@ -487,7 +487,7 @@ function update_tags (select_element_id, act_id) {
     var model = jQuery("#" + select_element_id + " :selected").text();
     var tmp_array = option_id.split("_");
     var item_type = tmp_array[0];
-    var item_id = tmp_array[1]; 
+    var item_id = tmp_array[1];
     //console.log("target_div: " + target_div + " | record_id: " + act_id + " | select_value: " + item_id + " | option_id: " + option_id + " | model:" + model + " | item_type: " + item_type);
     if (typeof item_id !== "undefined") {
         selectItem(target_div, model, item_id, act_id, item_type);
@@ -512,11 +512,11 @@ function selectItem(targetDiv, model, item_id, record_id, item_type) {
         switch(item_type) {
             case "tag":
             case "goal":
-                var infoUrl = "http://" + window.location.hostname + "/forms/formAthlete.php?action=link_" + item_type + "&item_id=" + item_id + "&record_id=" + record_id;
+                var infoUrl = "/forms/formAthlete.php?action=link_" + item_type + "&item_id=" + item_id + "&record_id=" + record_id;
                 break;
             case "equip":
-                var infoUrl = "http://" + window.location.hostname + "/forms/usageEquipment.php?action=add&equip_id=" + item_id + "&record_id=" + record_id;
-                break; 
+                var infoUrl = "/forms/usageEquipment.php?action=add&equip_id=" + item_id + "&record_id=" + record_id;
+                break;
         }
 	    xmlhttp.open("GET",infoUrl,true);
 	    xmlhttp.send();
@@ -541,10 +541,10 @@ function removeItem(item_id, record_id, item_type) {
     switch(item_type) {
         case "tag":
         case "goal":
-            var infoUrl = "http://" + window.location.hostname + "/forms/formAthlete.php?action=unlink_" + item_type + "&item_id=" + item_id + "&record_id=" + record_id;
+            var infoUrl = "/forms/formAthlete.php?action=unlink_" + item_type + "&item_id=" + item_id + "&record_id=" + record_id;
             break;
         case "equip":
-            var infoUrl = "http://" + window.location.hostname + "/forms/usageEquipment.php?action=remove&equip_id=" + item_id + "&record_id=" + record_id;
+            var infoUrl = "/forms/usageEquipment.php?action=remove&equip_id=" + item_id + "&record_id=" + record_id;
             break;
     }
 	xmlhttp.open("GET",infoUrl,true);
@@ -570,7 +570,7 @@ function loadChart(action, week, month, year, targetDiv) {
     var embedChart = new Image();
     embedChart.src="buildChart.php?action=" + action + "&week=" + week + "&month=" + month + "&year=" + year;
     var div = document.getElementById(targetDiv);
-    removeImg(targetDiv); 
+    removeImg(targetDiv);
 	div.appendChild(embedChart);
 }
 
@@ -583,7 +583,7 @@ function removeImg(targetDiv) {
 
 // Added for popup div
 
-function toggle(div_id) {     
+function toggle(div_id) {
 	jQuery("#"+ div_id).toggle();
 }
 
@@ -611,7 +611,7 @@ function blanket_size(popUpDivVar) {
 
 function window_pos(popUpDivVar) {
 	var popUpDiv = document.getElementById(popUpDivVar);
-    window_width = popUpDiv.parentNode.offsetWidth/2 - jQuery('#' + popUpDivVar).width()/2; 
+    window_width = popUpDiv.parentNode.offsetWidth/2 - jQuery('#' + popUpDivVar).width()/2;
 	popUpDiv.style.left = window_width + 'px';
 }
 
@@ -620,10 +620,10 @@ function popup(windowname) {
 	window_pos(windowname);
 	toggle('blanket');
 	toggle(windowname);
-    toggle('result');		
+    toggle('result');
 }
 
-function loadGC(server_name) { 
+function loadGC(server_name) {
     popup('garminconnect');
     loadGarminConnect(server_name);
 }
@@ -643,7 +643,7 @@ function act_preview (act_id, targetDiv) { // ToDo: caching!
 	}
     div_element.style.display = "block";
     div_element.style.background = "rgba(0,0,0,0.7) url('images/28-1.gif') center no-repeat"
-    var infoUrl = "http://" + window.location.hostname + "/forms/formWorkout.php?action=preview&act_id=" + act_id;
+    var infoUrl = "/forms/formWorkout.php?action=preview&act_id=" + act_id;
 	xmlhttp.open("GET",infoUrl,true);
 	xmlhttp.send();
 }
@@ -680,13 +680,13 @@ function changeActVisibility(act_id, next_status) {
 			    alert(result_msg);
                 if (next_status === 0){
                     jQuery('a#visible').text("Actividad privada");
-                    jQuery("#lock").attr("src","http://" + window.location.hostname +"/images/lock_16x16.png");
+                    jQuery("#lock").attr("src","/images/lock_16x16.png");
                     jQuery("#lock").attr("alt","Privado");
 	                jQuery('a#visible').attr("title", "Permitir acceso público");
                     disable_share_links();
                 } else {
                     jQuery('a#visible').text("Actividad pública");
-                    jQuery("#lock").attr("src","http://" + window.location.hostname +"/images/unlock_16x16.png");
+                    jQuery("#lock").attr("src","/images/unlock_16x16.png");
                     jQuery("#lock").attr("alt","Público");
                     jQuery('a#visible').attr("title", "Restringir la privacidad");
                     enable_share_links();
@@ -697,7 +697,7 @@ function changeActVisibility(act_id, next_status) {
             }
 		}
 	}
-    var infoUrl= "http://" + window.location.hostname + "/forms/formWorkout.php?action=change_visibility&act_id=" + act_id + "&next_status="  + next_status;
+    var infoUrl= "/forms/formWorkout.php?action=change_visibility&act_id=" + act_id + "&next_status="  + next_status;
 	xmlhttp.open("GET",infoUrl,true);
 	xmlhttp.send();
 }
@@ -733,7 +733,7 @@ function disable_share_links () {
 
 function moveContent (sourceDiv, targetDiv, origContent, has_gpx) {
     if ( has_gpx === undefined ) {
-        has_gpx = true;  
+        has_gpx = true;
     }
     if (has_gpx) {
         return_text = 'Mostrar mapa';
@@ -742,7 +742,7 @@ function moveContent (sourceDiv, targetDiv, origContent, has_gpx) {
         return_text = 'Ocultar actividades similares';
         return_title = 'Sin datos para mostrar en mapa';
     }
-    
+
     if (jQuery("#" + origContent).is(':visible')) {
         jQuery("#" + origContent).hide();
         jQuery("#" + targetDiv).empty();
@@ -783,13 +783,13 @@ function select_map(html_input) {
     //console.log("Form name: " + form_id + " | Result id: " + result_id + " | Action: " + php_script + " | Value: " + html_input.value);
     var close_link = "<a href='javascript:void(0);' onClick='jQuery(\"#" + result_id + "\").hide();' title='Cerrar'>[x]</a>";
     // Send form via AJAX
-    jQuery.post(php_script, jQuery('#'+ form_id).serialize(), 
+    jQuery.post(php_script, jQuery('#'+ form_id).serialize(),
         function(data) {
             var result = JSON.parse(data);
             var result_msg = "";
             // Remove all classes that may be there from past actions
             jQuery("#" + result_id).removeClass("oculto settings-feedback settings-success settings-error");
-            // Remove style attribute added when hiding result div via click 
+            // Remove style attribute added when hiding result div via click
             jQuery("#" + result_id).css('display', '');
             if (result.hasOwnProperty("success")) {
                 result_msg = result.success;
@@ -807,4 +807,3 @@ function select_map(html_input) {
         }
     );
 }
-

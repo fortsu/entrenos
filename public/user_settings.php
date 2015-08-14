@@ -64,7 +64,7 @@ $daily_report_url = $base_url . "/users/" . $current_user->id . "/reports/daily_
             <div class="settings_header">Preferencias de mapas</div>
             <div class="settings_header_sub">Tu <strong>privacidad</strong> en el punto de mira.</div>
             <div id="maps_form_result" class="oculto"></div>
-            <form id="maps_form" name="maps_form" action="<?php echo $base_url; ?>/forms/formUser.php" method="post" enctype="multipart/form-data">
+            <form id="maps_form" name="maps_form" action="/forms/formUser.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="select_map">
                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                 <input type="hidden" name="source_ip" value="<?php echo $_SERVER['REMOTE_ADDR']; ?>">

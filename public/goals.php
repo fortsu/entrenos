@@ -100,7 +100,7 @@ require_once $base_path . '/check_access.php';
                 }
                 echo "<tr>";
                     echo "<td style=\"background:transparent;padding: 2px 0px;border-width: 0px\">";
-                        echo "<a href=" . $base_url ."/forms/formAthlete.php?action=remove_goal&entry=" . $goal->id . " onclick=\"return confirm('¿Borrar el objetivo de " . $goal->name . "?');\">";
+                        echo "<a href=/forms/formAthlete.php?action=remove_goal&entry=" . $goal->id . " onclick=\"return confirm('¿Borrar el objetivo de " . $goal->name . "?');\">";
                             echo "<img src=\"images/close-icon_16.png\" alt=\"Borrar entrada\" title=\"Borrar objetivo\"/>";
                         echo "</a>";
                     echo "</td>";
@@ -127,7 +127,7 @@ require_once $base_path . '/check_access.php';
                     echo $num_km . " km </td>";
                     if ($goal->report_enabled){
                         $server_path = $_SERVER['SERVER_NAME'] . pathinfo($_SERVER['REQUEST_URI'],PATHINFO_DIRNAME);
-                        $report = $base_url . "/" . $goal->report_url;
+                        $report = "/" . $goal->report_url;
                         echo "<td><a href=\"" . $report . "\" title=\"" . $report . "\" target=\"_blank\">Enlace al informe</a></td>";
                     }
                 echo "</tr>";
