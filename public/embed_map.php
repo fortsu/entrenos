@@ -5,8 +5,8 @@
     use Entrenos\Activity;
     session_start();
 ?>
-    var startimage = "<?php echo $base_url; ?>/images/start.png";
-    var finishimage = "<?php echo $base_url; ?>/images/finish.png";
+    var startimage = "/images/start.png";
+    var finishimage = "/images/finish.png";
     var startIcon = new google.maps.MarkerImage(startimage,
         // If size is not supplied, Gmaps makes a call to download the image and reads its size
         new google.maps.Size(32, 32),
@@ -23,7 +23,7 @@
         // Anchor is defined as fourth argument, relative to the top left corner of the image with positive X going right and positive Y going down
         new google.maps.Point(16, 32));
 
-<?php            
+<?php
     $my_file = $_GET['file'];
     $activity_id = pathinfo($my_file, PATHINFO_BASENAME);
     $parser = new GPXPlusParser();
@@ -130,11 +130,11 @@
         }
         /*
         var lap1marker = new google.maps.Marker({
-            position: new google.maps.LatLng(43.543912, -5.645886), 
-            icon: lapimage, 
-            map: map,  
+            position: new google.maps.LatLng(43.543912, -5.645886),
+            icon: lapimage,
+            map: map,
             title:"Lap1"});
- 
+
         var lap1 = new google.maps.InfoWindow({
             content: "<div class='info_content'>End of lap:1<br>Elapsed time:5m:9.49s<br>Distance:1.00 km<br>Calories:84</div>" });
         google.maps.event.addListener(lap1marker, 'click', function() { lap1.open(map,lap1marker); });
@@ -142,7 +142,7 @@
 
 ?>
 		var polylineCoordinates = [
-<?php 
+<?php
 		foreach($arrLatLon as $key => $value) {
             if (!empty($value['lat']) and !empty($value['lon'])) {
 			    echo "new google.maps.LatLng(" . $value['lat'] . ", " . $value['lon'] . ")";
@@ -151,7 +151,7 @@
 				    echo ",";
                     echo "\r\n";
             }
-		} 
+		}
 ?>
         ];
 
@@ -167,4 +167,3 @@
         $log->info("No position data in any of the " . $numPoints . " points available, no map to display");
     }
 ?>
-	
