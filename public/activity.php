@@ -78,8 +78,8 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
     if ($maps_choice === "gmaps") {
 ?>
     <link rel="stylesheet" href="https://developers.google.com/maps/documentation/javascript/examples/standard.css" type="text/css" />
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <?php
     } else {
 ?>
