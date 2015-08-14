@@ -19,16 +19,17 @@ use Entrenos\Token;
  * If authentication is successful, issue new cookies and store data in DB
  * If any failed, remove cookies from browser
  * Redirect user properly
- * 
+ *
  * http://stackoverflow.com/questions/9890766/how-to-implement-remember-me-feature
  * https://github.com/gallir/Meneame/blob/master/branches/version5/www/libs/login.php
  */
 class Cookie {
 
     const HASH_ALGORITHM = 'sha256';
-    const HTTP_ONLY = TRUE;
+    const HTTP_ONLY = true;
+    const SECURE = true;
     const DURATION_DAYS = 30;
-    
+
     var $id;
     var $user_id;
     var $hash;
@@ -85,7 +86,7 @@ class Cookie {
 
     public static function issue_new($user_id, $token, $remote_ip, $user_agent){
         $expiration_dt = new DateTime("now", new DateTimeZone('UTC'));
-        $expiration_dt->add(new \DateInterval('P' . self::DURATION_DAYS . 'D')); 
+        $expiration_dt->add(new \DateInterval('P' . self::DURATION_DAYS . 'D'));
         $salt = self::create_salt();
         $cookie_data = array("user_id" => $user_id,
                                 "hash" => self::create_cookie_hash($token, $salt),
@@ -134,7 +135,7 @@ class Cookie {
         }
     }
 
-    public function save($conn) { 
+    public function save($conn) {
         $sql_query = "INSERT INTO pcookies (user_id, hash, expiration, salt, remote_ip, user_agent) VALUES (:user_id, :hash, :expiration, :salt, :remote_ip, :user_agent)";
         $stmt = $conn->prepare($sql_query);
         $stmt->bindParam(':user_id', $this->user_id);

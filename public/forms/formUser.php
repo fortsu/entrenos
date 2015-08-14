@@ -58,8 +58,8 @@ use \Exception;
                             // Store uc and ut in browser
                             // Although datetime and strtotime are both UTC, default timezone is not (TODO: based on locale)
                             $expiration_dt = new DateTime($new_cookie->expiration, new DateTimeZone('UTC'));
-                            $cookie_result["uc"] = setcookie("uc", $new_cookie->hash, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], FALSE, Cookie::HTTP_ONLY);
-                            $cookie_result["ut"] = setcookie("ut", $new_token, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], FALSE, Cookie::HTTP_ONLY);
+                            $cookie_result["uc"] = setcookie("uc", $new_cookie->hash, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], Cookie::SECURE, Cookie::HTTP_ONLY);
+                            $cookie_result["ut"] = setcookie("ut", $new_token, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], Cookie::SECURE, Cookie::HTTP_ONLY);
                             $log->debug("Cookie set (" . json_encode($cookie_result) . ") | User " . $_SESSION['user_id'] . " | " . $_SERVER['SERVER_NAME']);
                             // Save in DB
                             $num_stored = $new_cookie->save($conn);
@@ -79,13 +79,13 @@ use \Exception;
                         }
                         $current_user->registerAccess($conn);
                         $log->info("User " . $_SESSION['login'] . " (id #" . $_SESSION['user_id'] .") starting session");
-		                // Redirecting to the logged page. 
+		                // Redirecting to the logged page.
 		                header('Location: ' . $base_url . '/calendar.php');
                         exit;
                     } else {
                         $log->error("User " . $current_user->id . " exists but is currently disabled | " . $_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT']);
                         $_SESSION['error'] = "El usuario " . $_REQUEST['login'] . " existe pero no está habilitado. Póngase en contacto con ayuda@fortsu.com";
-                        // Redirecting error page. 
+                        // Redirecting error page.
 		                header('Location: ' . $base_url . '/technical_error.php');
                         exit;
                     }
@@ -184,7 +184,7 @@ use \Exception;
                         if ($current_user->enabled) {
                             # generate token
                             $current_token = new Token(TRUE);
-                            $current_token->user_id = $current_user->id;                        
+                            $current_token->user_id = $current_user->id;
                             $current_token->remote_ip = $_REQUEST['remote_ip'];
                             # store it in db
                             $current_token->save($conn);
@@ -198,14 +198,14 @@ use \Exception;
                             session_start();
                             $log->error("User " . $current_user->id . " exists but is currently disabled | " . $_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT']);
                             $_SESSION['error'] = "El usuario <b>" . $current_user->username . "</b> existe pero no está habilitado. Póngase en contacto con ayuda@fortsu.com";
-                            // Redirecting error page. 
+                            // Redirecting error page.
 		                    header('Location: ' . $base_url . '/technical_error.php');
                         }
                     } else {
                         $log->error("No user found for provided email address " . $email);
                         session_start();
                         $_SESSION['error'] = "La dirección de correo electrónico " . $email . " no corresponde a ningún usuario";
-                        // Redirecting error page. 
+                        // Redirecting error page.
 		                header('Location: ' . $base_url . '/technical_error.php');
                     }
                 } catch (Exception $e) {

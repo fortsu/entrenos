@@ -3,6 +3,8 @@ use \PDO;
 use Entrenos\User;
 use Entrenos\Utils\Cookie;
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/global_config.php';
+
 session_start();
 // Session for authenticated users ALWAYS contains 'login' and 'user_id' variables
 if (!empty($_SESSION['user_id'])) {
@@ -17,7 +19,7 @@ if (!empty($_SESSION['user_id'])) {
     }
 } else if (!empty($_COOKIE['uc']) and !empty(isset($_COOKIE['ut']))) { //arriving directly
     $log->debug("Found cookie: " . json_encode($_COOKIE));
-    /** 
+    /**
      * - Cookie authentication logic:
      * Look up user's cookie (uc) in database and retrieve associated values:
      * 1.- Check if it did not expired yet
@@ -44,8 +46,8 @@ if (!empty($_SESSION['user_id'])) {
                 // Store uc and ut in browser
                 // Although datetime and strtotime are both UTC, default timezone is not (TODO: based on locale)
                 $expiration_dt = new DateTime($new_cookie->expiration, new DateTimeZone('UTC'));
-                $cookie_result["uc"] = setcookie("uc", $new_cookie->hash, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], FALSE, Cookie::HTTP_ONLY);
-                $cookie_result["ut"] = setcookie("ut", $new_token, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], FALSE, Cookie::HTTP_ONLY);
+                $cookie_result["uc"] = setcookie("uc", $new_cookie->hash, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], Cookie::SECURE, Cookie::HTTP_ONLY);
+                $cookie_result["ut"] = setcookie("ut", $new_token, $expiration_dt->getTimestamp(), "/", $_SERVER['SERVER_NAME'], Cookie::SECURE, Cookie::HTTP_ONLY);
                 $log->debug("Cookie set (" . json_encode($cookie_result) . ") | User " . $current_cookie->user_id . " | " . $_SERVER['SERVER_NAME']);
                 // Save in DB
                 $num_stored = $new_cookie->save($conn);
@@ -69,7 +71,7 @@ if (!empty($_SESSION['user_id'])) {
                 $_SESSION['user_id'] = 0;
                 // Redirect to error page -> proper error message
                 $_SESSION['error'] = "Hay indicios de ataque porque la información contenida en las cookies de su navegador no concuerdan con la almacenada en el sistema. Si cree que se trata de un error, por favor póngase en contacto con ayuda@fortsu.com";
-                $url = "http://" . $_SERVER['SERVER_NAME'] . "/technical_error.php";
+                $url = $base_url . "/technical_error.php";
                 $log->debug('Redirecting to: ' . $url);
 		        header('Location: ' . $url);
                 exit();
@@ -87,7 +89,7 @@ if (!empty($_SESSION['user_id'])) {
             // Redirect to login page -> proper error message
             // TODO: save original target url to redirect after proper authentication
             $_SESSION['error'] = "Se han encontrado cookies en su navegador pero han expirado, necesita autenticarse para acceder";
-            $url = "http://" . $_SERVER['SERVER_NAME'] . "/technical_error.php";
+            $url = $base_url . "/technical_error.php";
             $log->debug('Redirecting to: ' . $url);
 		    header('Location: ' . $url);
             exit();
@@ -102,7 +104,7 @@ if (!empty($_SESSION['user_id'])) {
         $_SESSION['user_id'] = 0;
         // Redirect to error page -> proper error message
         $_SESSION['error'] = "No se ha podido verificar el contenido encontrado en las cookies. Por favor proceda a autenticarse";
-        $url = "http://" . $_SERVER['SERVER_NAME'] . "/technical_error.php";
+        $url = $base_url . "/technical_error.php";
         $log->debug('Redirecting to: ' . $url);
 		header('Location: ' . $url);
         exit();
@@ -111,14 +113,14 @@ if (!empty($_SESSION['user_id'])) {
     // Mark as a guest
     $_SESSION['user_id'] = 0;
     // Exclude login page to avoid infinite loop
-    $login_page = "http://" . $_SERVER['SERVER_NAME'] . "/index.php";
-    $activity_page = "http://" . $_SERVER['SERVER_NAME'] . "/activity.php";
-    $requested_uri = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'];
+    $login_page = $base_url . "/index.php";
+    $activity_page = $base_url . "/activity.php";
+    $requested_uri = $base_url . $_SERVER['PHP_SELF'];
     if (($requested_uri != $login_page) and ($requested_uri != $activity_page)) {
         //Redirected guests to login page
-        $log->info($_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT'] . " | Guests trying to access " . $_SERVER['PHP_SELF'] . " | Redirect to " . $login_page);  
+        $log->info($_SERVER['REMOTE_ADDR'] . " | " . $_SERVER['HTTP_USER_AGENT'] . " | Guests trying to access " . $_SERVER['PHP_SELF'] . " | Redirect to " . $login_page);
        	header('Location: ' . $login_page);
         exit();
     }
 }
-?> 
+?>
