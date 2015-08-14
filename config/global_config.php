@@ -15,7 +15,7 @@
     * Manually changed properties
     **/
     // Force browsers to load latest version of css and js files
-    $fv = "20140820";
+    $fv = "20150812";
     // Overall language
     $fortsu_lang = "es";
     // TODO: base timezone on locale
@@ -24,9 +24,10 @@
     /**
     * Automatically loaded ones
     **/
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] === 443) ? "https://" : "http://";
     // $_SERVER['SERVER_NAME'] is defined in server config, $_SERVER['HTTP_HOST'] comes from HTTP header (can be manipulated)
-    $base_url = "http://" . $_SERVER['SERVER_NAME']; 
-    $domain_name = str_replace("www.", "", $_SERVER['SERVER_NAME']); 
+    $base_url = $protocol . $_SERVER['SERVER_NAME'];
+    $domain_name = str_replace("www.", "", $_SERVER['SERVER_NAME']);
     $fortsu_domain = $base_url;
     // $_SERVER['DOCUMENT_ROOT'] -> /var/www/html/entrenos (DEV)
     $base_path = $_SERVER['DOCUMENT_ROOT'];
