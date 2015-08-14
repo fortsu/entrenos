@@ -5,18 +5,18 @@
     use Entrenos\Utils\Utils;
     session_start();
 
-    // OpenLayers execute a GET request so preparing temporary location for data source: 
+    // OpenLayers execute a GET request so preparing temporary location for data source:
     // path: BASE_PATH/tmp/<user_id>/<random_filename>
     // url: BASE_URL/tmp/<user_id>/<random_filename>
     $orig_file = $base_path . "/" . $_GET['file']; // users/<user_id>/data/<activity_id>
     $activity_id = pathinfo($orig_file, PATHINFO_BASENAME);
-    $ol_filename = substr(md5(mt_rand()), 0, 10); 
+    $ol_filename = substr(md5(mt_rand()), 0, 10);
     $tmp_path = $base_path . "/tmp/" . $_SESSION["user_id"];
     $tmp_file = $tmp_path . "/" . $ol_filename;
     $tmp_file_url = $base_url . "/tmp/" . $_SESSION["user_id"] . "/" . $ol_filename;
     // Checking path integrity (exists, can write on it)
     if (is_dir($tmp_path) === FALSE) {
-        if (mkdir($tmp_path, 0755, true) === FALSE) { 
+        if (mkdir($tmp_path, 0755, true) === FALSE) {
             $log->error("Error when creating temporary directory \"" . $tmp_path . "\" | Error: " . json_encode(error_get_last()));
             throw new Exception("Error when parsing activity " . $activity_id);
         }
@@ -38,7 +38,7 @@
     $numPoints = count($arrLatLon);
     if ($numPointsPosition > 0) {
         $log->debug("Found " . $numPointsPosition . " out of " . $numPoints . " points with valid position data. Displaying map...");
-    
+
 	    $averages = $parser->getCenter($arrLatLon);
         echo "var lat=" . $averages['lat'] . ";\n\r";
         echo "var lon=" . $averages['lon'] . ";\n\r";
@@ -81,7 +81,7 @@
                 new OpenLayers.Control.Attribution()],
             numZoomLevels: 19
         };
-     
+
         var map = new OpenLayers.Map('map_canvas', options);
 
 	    // Define the map layer
@@ -97,7 +97,7 @@
         // Adding markers (start, finish, laps)
 	    layerMarkers = new OpenLayers.Layer.Markers("Vueltas");
 	    map.addLayer(layerMarkers);
-     
+
 	    // Add the Layer with the GPX Track
 	    var lgpx = new OpenLayers.Layer.GML("<?php echo "Ruta " . $layer_datetime; ?>", "<?php echo $tmp_file_url; ?>", {
 		    format: OpenLayers.Format.GPX,
@@ -109,7 +109,7 @@
         // Centering map. Zoom value will be overriden by bounding to frame (SW, NE) positions
 	    var lonLat = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 	    map.setCenter(lonLat, zoom);
-        
+
         // Extend map zoom to bound extreme positions
         posBounds = new OpenLayers.Bounds();
         var lonLatSW = new OpenLayers.LonLat(southWest_lon,southWest_lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
@@ -162,10 +162,10 @@
                             map.getProjectionObject() // to Spherical Mercator Projection
                         );
 
-        var startIcon = new OpenLayers.Icon("<?php echo $base_url; ?>/images/start.png",size,offset);
+        var startIcon = new OpenLayers.Icon("/images/start.png",size,offset);
         layerMarkers.addMarker(new OpenLayers.Marker(startlatlng,startIcon));
 
-        var finishIcon = new OpenLayers.Icon("<?php echo $base_url; ?>/images/finish.png",size,offset);
+        var finishIcon = new OpenLayers.Icon("/images/finish.png",size,offset);
         layerMarkers.addMarker(new OpenLayers.Marker(finishlatlng,finishIcon));
 
         // Zoom to bound where all markers in marker layer are extended.
