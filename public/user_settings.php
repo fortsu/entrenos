@@ -62,7 +62,7 @@ $daily_report_url = $base_url . "/users/" . $current_user->id . "/reports/daily_
 ?>
         <li>
             <div class="settings_header">Preferencias de mapas</div>
-            <div class="settings_header_sub">Tu <strong>privacidad</strong> en el punto de mira.</div>
+            <div class="settings_header_sub">Tu <strong>privacidad</strong> en el punto de mira. La descarga de los mapas <a href="http://www.opencyclemap.org/">OpenCycleMap</a> no es cifrada por ser <a href="http://www.thunderforest.com/pricing/">una característica de pago</a>.</div>
             <div id="maps_form_result" class="oculto"></div>
             <form id="maps_form" name="maps_form" action="/forms/formUser.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="select_map">
