@@ -84,7 +84,7 @@ if ($current_act->user_id !== $_SESSION['user_id']) {
     } else {
 ?>
     <link rel="stylesheet" href="/osm/current/theme/default/style.css" type="text/css"/>
-    <script type="text/javascript" src="/osm/current/OpenLayers.js"></script>
+    <script type="text/javascript" src="/osm/current/OpenLayers-b.js"></script>
     <script type="text/javascript" src="/osm/current/lib/deprecated.js"></script>
     <style>
         /*  Altering the location of the attribution text and scale line, see http://wiki.openstreetmap.org/wiki/OpenLayers_Simple_Example */
