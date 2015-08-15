@@ -1,5 +1,11 @@
 <?php
 
+// Application running on shared vps server, the only one over https
+// http://stackoverflow.com/questions/3517350/session-hijacking-and-php
+ini_set('session.use_only_cookies', 1);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', 1);
+
     // TODO: think about Singleton when loading configuration (bootstrap file)
     // http://stackoverflow.com/questions/3313950/php-bootstrapping-basics
     // http://codereview.stackexchange.com/questions/7867/bootstrap-file-safe-and-correct
